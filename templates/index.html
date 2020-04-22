@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MemN2N for Table QA</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- <link href="https://svakulenko.ai.wu.ac.at/tableqastatic/style.css" rel="stylesheet"> -->
+    <link href="../static/style.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!-- <script src="https://svakulenko.ai.wu.ac.at/tableqastatic/script.js"></script> -->
+    <script src="../static/script.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+
+<body onload="getdata()">
+<h2 class="text-center app-header">End-To-End Memory Network for Table QA</h2>
+<br>
+
+<p id="newtable"></p>
+<div class="container">
+
+<!-- <a class="github-button" href="https://github.com/vendi12/MemN2N-tableQA" data-size="large" aria-label="Get source on GitHub">Source</a> -->
+
+    <div class="row">
+        <div class="col-md-6 shadow qa-container">
+            <form class="qa-form">
+                <div class="form-group">
+                    <h4><label for="table">Table</label></h4>
+
+                    <table class="table table-hover" id="table">
+                        <thead>
+                            <tr>
+                                <th>nuts32</th>
+                                <th>lau2_code</th>
+                                <th>lau2_name</th>
+                                <th>year</th>
+                                <th>internal_mig_immigration</th>
+                                <th>international_mig_immigration</th>
+                                <th>immigration_total</th>
+                                <th>internal_mig_emigration</th>
+                                <th>international_mig_emigration</th>
+                                <th>emigration_total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="form-group hidden">
+                    <!-- <h4><label for="story">Table</label></h4> -->
+                    <textarea class="form-control" id="story" rows="10" readonly></textarea>
+                </div>
+                <div class="form-group">
+                    <h4>
+                        <label for="question">Question</label>
+                        <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip"
+                           data-placement="top" title="Use suggested question or type your own question"></i>
+                    </h4>
+                    <input class="form-control" id="question" autofocus
+                           autocomplete="off" spellcheck="false">
+                    <!-- <textarea class="form-control" rows="5" readonly id="dis_question"></textarea> -->
+                    <div id="dis_question"></div>
+
+                </div>
+                <div class="form-group">
+                    <h4><label for="answer">Answer</label></h4>
+                    <div id="answer"></div>
+                    <!-- <textarea class="form-control" id="answer" rows="3" readonly></textarea> -->
+                </div>
+                <br>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" id="get_answer" type="submit">Predict answer</button>
+                    <button type="button" class="btn btn-primary active" id="get_story" type="submit">Get new table</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 shadow qa-explain-container">
+            <div class="form-group">
+                <table class="table table-hover" id="explanation">
+                    <thead>
+                        <tr>
+                            <th>Table Cell</th>
+                            <th>Mem 1</th>
+                            <th>Mem 2</th>
+                            <th>Mem 3</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

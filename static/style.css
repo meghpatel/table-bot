@@ -1,0 +1,59 @@
+body {
+    padding-top: 10px;
+    font-family: 'Lobster', sans-serif;
+}
+
+div.shadow {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 24px #bbb;
+    color: #666;
+}
+
+.qa-container, .qa-explain-container {
+    width: 1260px;
+    /*width: 550px;*/
+    /*max-height: 650px;*/
+    padding: 20px 10px 40px;
+    margin-top: 10px;
+    margin-left: 0px;
+}
+
+.qa-container table th {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.container > h3 {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+input.tdinput
+{
+    width: 100%;
+}
+
+.qa-form {
+    max-width: 3600px;
+    margin: 0 auto;
+}
+
+.qa-form .btn {
+    width: 200px;
+}
+
+.qa-form .form-control {
+    width: 650px;
+}
+
+/* Font */
+.app-header, .qa-form label, .qa-explain-container label, .qa-explain-container th {
+    font-family: 'Lobster';
+}
+/*.qa-form input, .qa-form textarea, .qa-form button {*/
+    /*font-family: 'Roboto', sans-serif;*/
+/*}*/
