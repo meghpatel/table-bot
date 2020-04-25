@@ -1,2 +1,5 @@
-# table-bot
-Question Answering System for Table
+```mkdir data```
+
+Then run flask app.
+
+```python app.py```
