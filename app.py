@@ -33,7 +33,7 @@ def allowed_file(filename):
  		filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def answer(query):
-	archive = load_archive("data/wikitables-model-2020.02.10.tar.gz")
+	archive = load_archive("models/wikitables-model-2020.02.10.tar.gz")
 	predictor = Predictor.from_archive(archive, 'wikitables-parser')
 	with open('data/final_output.txt','r') as f:
 		table = f.read()
