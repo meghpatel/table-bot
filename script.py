@@ -12,8 +12,9 @@ from fuzzywuzzy import process
 import pandas as pd
 from rivia import Rivia
 
-r = Rivia('Megh')
+r = Rivia('table')
 r.what()
+r.say_hello('Megh')
 
 # last_line = []
 # with open('data/output.txt', 'r') as f:
@@ -33,63 +34,11 @@ r.what()
 # for i in range(len(s)):
 #     fd.write(s[i])
 # fd.close()
+question = "Which country have more than 5000 deaths?"
+result = r.rivia_predict(question)
+print(result["logical_form"][0])
 
-archive = load_archive("model/wikitables-model-2020.02.10.tar.gz")
-predictor = Predictor.from_archive(archive, 'wikitables-parser')
-with open('data/final_output.txt','r') as f:
-	table = f.read()
-# print (query)
-# print (table)
-question = "Which country have death greater than 5000?"
-data = {
-  "table": table,
-  "question": question
-}
-
-result = predictor.predict_json(data)
-print(result["answer"])
-# print(result["logical_form"][0])
-
-temp_answer = result['answer']
-print (type(temp_answer))
-
-if type(temp_answer) is list:
-	df = pd.read_table('data/final_output.txt','\t')
-	types = dict(df.dtypes)
-
-	checks = []
-	for key, value in types.items():
-		if (value == 'object'):
-			checks.append(key)
-
-	thershold = 50
-	final_answer = []
-
-	for answer in temp_answer:
-		if type(answer) is str:
-			match = {}
-			# print (answer)
-			for check in checks:
-				for index, row in df.iterrows(): 
-					# print (row[check]) 
-					if process.extractOne(answer,[row[check]])[1] > 50:
-						# print (row[check])
-						match[row[check]] = process.extractOne(answer,[row[check]])[1]
-
-			# print (match)
-			max_val = 0
-			max_key = ''
-			for key in match.keys():
-				if match[key]>max_val:
-					max_val = match[key]
-					max_key = key
-			# print(max_key, max_val)		# pass
-			final_answer.append(max_key)
-			print (final_answer)
-	ans = ','.join(final_answer)
-else:
-	ans = temp_answer
-
+ans = r.correct_answer(result['answer'])
 # print (final_answer)
 # reply = {'answer':result['answer']}
 # print (type(jsonify(reply)))
@@ -104,11 +53,11 @@ else:
 # fd.close()
 
 
-query = 'united_states'
-choices = ['United States']
+# query = 'united_states'
+# choices = ['United States']
    
 # Get a list of matches ordered by score, default limit to 5 
-print (process.extractOne(query, choices)) 
+# print (process.extractOne(query, choices)) 
    
 # If we want only the top one 
 # print (process.extractOne(query, choices) )
