@@ -67,6 +67,7 @@ document.querySelector('#fileUpload').addEventListener('change', event => {
 
 const handleUpload = event => {
 	const url = `${window.origin}/upload`;
+	const url1 = `${window.origin}/getanswer`;
 	console.log(url);
 
 	const files = event.target.files
@@ -82,6 +83,48 @@ const handleUpload = event => {
 	}).then(response => response.json())
 	.then(data => {
 		console.log(data)
+		// html = JSON.parse(data);
+// 	    console.log(data.ans)
+	    document.getElementById('tabledis').innerHTML = data.ans;
+	    const box = document.getElementById('chat1');
+	    const inp = document.createElement("INPUT");
+	    inp.setAttribute('type','text');
+	    inp.setAttribute('size',50);
+	    inp.setAttribute('id','inputbox')
+	    box.appendChild(inp);
+	    box.style['text-align'] = 'center';
+	    inp.addEventListener("keyup", function(event) {
+			if (event.keyCode === 13) {
+				event.preventDefault();
+				console.log("Click");
+				// window.alert(inp.value);
+				let query = inp.value;
+				const response = document.getElementById('response');
+				response.innerHTML = query;
+				inp.value = ''
+
+				const entry = { query }
+				fetch(url1,{
+					method:'POST',
+					credentials: "include",
+					body: JSON.stringify(entry),
+					cache: "no-cache",
+					headers: new Headers({
+						"content-type": "application/json"
+    				})
+				}).then(response => response.json())
+				.then(data => {
+					console.log(data)
+					// const chatbox = document.getElementById('chatbox')
+					const reply = document.createElement('div')
+					response.appendChild(reply)
+					// console.log(typeof(data))
+					// const obj = JSON.parse(data)
+					reply.innerHTML = data
+					reply.style['text-align'] = "right";
+				});
+			}
+		});
 	})
 	.catch(error => {
 	console.error(error)
