@@ -33,12 +33,15 @@ def allowed_file(filename):
  		filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def answer(query):
-	archive = load_archive("models/wikitables-model-2020.02.10.tar.gz")
+	#Loading the model
+	archive = load_archive("model/wikitables-model-2020.02.10.tar.gz")
 	predictor = Predictor.from_archive(archive, 'wikitables-parser')
+
+	#Reading the Data
 	with open('data/final_output.txt','r') as f:
 		table = f.read()
-	print (query)
-	print (table)
+	
+
 	question = query
 	data = {
 	  "table": table,
@@ -52,7 +55,23 @@ def answer(query):
 	reply = {"answer":result['answer']}
 	# print (type(jsonify(reply)))
 	print (str(reply))
+	print (type(result['answer']))
 	return str(reply)
+
+def strip_file():
+	fd=open("data/output.txt","r")
+	d=fd.read()
+	fd.close()
+	m=d.split("\n")
+	s="\n".join(m[:-1])
+	fd=open("data/final_output.txt","w+")
+	for i in range(len(s)):
+		fd.write(s[i])
+	fd.close()
+
+# def check_name():
+
+# 	#open the file
 
 
 # @app.before_first_request(load_func())	  
@@ -61,19 +80,19 @@ def answer(query):
 def home():
 	return render_template("index.html")
 
-@app.route('/getdata', methods=['GET', 'POST'])
-def getdata():
-	@after_this_request
-	def add_header(response):
-		response.headers['Access-Control-Allow-Origin'] = '*'
-		return response
+# @app.route('/getdata', methods=['GET', 'POST'])
+# def getdata():
+# 	@after_this_request
+# 	def add_header(response):
+# 		response.headers['Access-Control-Allow-Origin'] = '*'
+# 		return response
 
-	df = pd.read_csv('data/cases.csv')
-	print (df.shape)
-	ans = df.to_html(bold_rows=True,classes="table table-hover thead-light table-striped")
-	resp = {"ans":ans}
+# 	df = pd.read_csv('data/cases.csv')
+# 	print (df.shape)
+# 	ans = df.to_html(bold_rows=True,classes="table table-hover thead-light table-striped")
+# 	resp = {"ans":ans}
 
-	return jsonify(resp)
+# 	return jsonify(resp)
 
 @app.route('/upload', methods=['POST', 'GET'])
 def upload():
@@ -89,15 +108,9 @@ def upload():
 			f.save(path)
 			
 			csv.writer(open("data/output.txt", 'w+'), delimiter='\t').writerows(csv.reader(open(path)))
-			fd=open("data/output.txt","r")
-			d=fd.read()
-			fd.close()
-			m=d.split("\n")
-			s="\n".join(m[:-1])
-			fd=open("data/final_output.txt","w+")
-			for i in range(len(s)):
-			    fd.write(s[i])
-			fd.close()
+			
+			strip_file()
+
 			df = pd.read_csv(path)
 			print (df.shape)
 			ans = df.to_html(bold_rows=True,classes="table table-hover thead-light table-striped")
