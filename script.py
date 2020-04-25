@@ -10,7 +10,10 @@ from allennlp_hub import pretrained
 from fuzzywuzzy import fuzz 
 from fuzzywuzzy import process
 import pandas as pd
+from rivia import Rivia
 
+r = Rivia('Megh')
+r.what()
 
 # last_line = []
 # with open('data/output.txt', 'r') as f:
@@ -50,11 +53,6 @@ print(result["answer"])
 temp_answer = result['answer']
 print (type(temp_answer))
 
-print (type([1,2]))
-
-if type([1,2]) is list:
-	print ('yes')
-
 if type(temp_answer) is list:
 	df = pd.read_table('data/final_output.txt','\t')
 	types = dict(df.dtypes)
@@ -68,25 +66,29 @@ if type(temp_answer) is list:
 	final_answer = []
 
 	for answer in temp_answer:
-		match = {}
-		# print (answer)
-		for check in checks:
-			for index, row in df.iterrows(): 
-				# print (row[check]) 
-				if process.extractOne(answer,[row[check]])[1] > 50:
-					# print (row[check])
-					match[row[check]] = process.extractOne(answer,[row[check]])[1]
+		if type(answer) is str:
+			match = {}
+			# print (answer)
+			for check in checks:
+				for index, row in df.iterrows(): 
+					# print (row[check]) 
+					if process.extractOne(answer,[row[check]])[1] > 50:
+						# print (row[check])
+						match[row[check]] = process.extractOne(answer,[row[check]])[1]
 
-		# print (match)
-		max_val = 0
-		max_key = ''
-		for key in match.keys():
-			if match[key]>max_val:
-				max_val = match[key]
-				max_key = key
-		# print(max_key, max_val)		# pass
-		final_answer.append(max_key)
-		print (final_answer)
+			# print (match)
+			max_val = 0
+			max_key = ''
+			for key in match.keys():
+				if match[key]>max_val:
+					max_val = match[key]
+					max_key = key
+			# print(max_key, max_val)		# pass
+			final_answer.append(max_key)
+			print (final_answer)
+	ans = ','.join(final_answer)
+else:
+	ans = temp_answer
 
 # print (final_answer)
 # reply = {'answer':result['answer']}
