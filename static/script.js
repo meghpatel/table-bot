@@ -99,8 +99,23 @@ const handleUpload = event => {
 				console.log("Click");
 				// window.alert(inp.value);
 				let query = inp.value;
-				const response = document.getElementById('response');
-				response.innerHTML = query;
+
+				//Creating a Chatbubble
+				const cb = document.getElementById('chatbot');
+				const que = document.createElement('div');
+				que.className = "talk-bubble tri-right round left-top";
+				const que_text = document.createElement('div');
+				que_text.className = "talktext";
+				const pr = document.createElement('p');
+				pr.innerHTML = query;
+				que_text.appendChild(pr);
+				que.appendChild(que_text);
+				cb.appendChild(que);
+				cb.appendChild(document.createElement("br"));
+
+
+
+				// response.innerHTML = query;
 				inp.value = ''
 
 				const entry = { query }
@@ -116,12 +131,26 @@ const handleUpload = event => {
 				.then(data => {
 					console.log(data)
 					// const chatbox = document.getElementById('chatbox')
-					const reply = document.createElement('div')
-					response.appendChild(reply)
+					// const reply = document.createElement('div')
+					// response.appendChild(reply)
 					// console.log(typeof(data))
 					// const obj = JSON.parse(data)
-					reply.innerHTML = data
-					reply.style['text-align'] = "right";
+
+
+					//Creating response bubble
+					const response_bubble = document.createElement('div');
+					response_bubble.className = 'talk-bubble tri-right round right-top' ;
+					const resbub_text = document.createElement('div');
+					resbub_text.className = 'talktext' ;
+					const rp = document.createElement('p');
+					rp.innerHTML = data;
+					resbub_text.appendChild(rp);
+					response_bubble.appendChild(resbub_text);
+					cb.appendChild(response_bubble);
+					cb.appendChild(document.createElement("br"));
+
+					// reply.innerHTML = data
+					// reply.style['text-align'] = "right";
 				});
 			}
 		});

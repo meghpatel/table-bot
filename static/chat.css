@@ -7,12 +7,14 @@
 
 /* CSS talk bubble */
 .talk-bubble {
-	margin: 40px;
+	/*margin: 40px;*/
   display: inline-block;
   position: relative;
 	width: 200px;
 	height: auto;
 	background-color: lightblue;
+	margin-left: 40%;
+	margin-bottom: 2%;
 }
 .border{
   border: 8px solid #666;
