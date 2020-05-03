@@ -15,14 +15,16 @@ app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
 current_file = 'data/output.tsv'
 
 rivia = None
-
+typefile = str()
 
 # @app.before_first_request
 def load_func():
 	global rivia
-	rivia = Rivia('table')
+	rivia = Rivia()
 	rivia.what()
-	print ('Loaded')
+	# rivia = Rivia('table')
+	# rivia.what()
+	# print ('Loaded')
 
 def allowed_file(filename):
 	return '.' in filename and \
@@ -82,21 +84,29 @@ def home():
 
 @app.route('/upload', methods=['POST', 'GET'])
 def upload():
-
+	
 	if request.method == 'POST':
 		f = request.files['table']
 		if f and allowed_file(f.filename):
 			path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename))
 			f.save(path)
+			extention = f.filename.rsplit('.', 1)[1].lower()
+			if extention in ['csv', 'tsv', 'db']:
+				print ('Table loaded')
+				typefile = 'table'
+			elif extention in ['txt']:
+				print ('Passage loaded')
+				typefile = 'passage'		
+			rivia.process_file(path,typefile)
 			
-			if f.filename.rsplit('.', 1)[1].lower() in ['csv', 'tsv', 'db']:
-				rivia.type = 'table'
-			
-			rivia.process_file(path)
+			if typefile == 'table':
+				df = pd.read_csv(path)
+				print (df.shape)
+				ans = df.to_html(bold_rows=True,classes="table table-hover thead-light table-striped")
+			else:
+				f = open(path,'r+').read()
+				ans = "<h4 style=\"margin-left:50px;margin-right:50px\">"+f+"</h4>"
 
-			df = pd.read_csv(path)
-			print (df.shape)
-			ans = df.to_html(bold_rows=True,classes="table table-hover thead-light table-striped")
 			resp = {"ans":ans}
 		else:
 			resp = {"ans":"Out of format"}
@@ -110,12 +120,15 @@ def getanswer():
 	req = request.get_json()
 	print(req)
 	# reply = answer(req['query'])
-
-	result = rivia.rivia_predict(req['query'])
-	print(result["logical_form"][0])
-
-	ans = rivia.correct_answer(result['answer'])
-
+	
+	result,typefile = rivia.rivia_predict(req['query'])
+	print(typefile)
+	if typefile == 'table':
+		print(result["logical_form"][0])
+		ans = rivia.correct_answer(result['answer'])
+	else:
+		print(result["best_span_str"])
+		ans = result["best_span_str"]
 	# reply = {"answer":ans}
 
 	res = make_response(jsonify(ans), 200)
