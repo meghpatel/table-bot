@@ -23,18 +23,22 @@
 <body>
 <h1 class="text-center app-header">Rivia</h2>
 <br>
-<form method="post" enctype="multipart/form-data" onsubmit="submit_data()">
+<form method="post" enctype="multipart/form-data" >
       <center><input type="file" id="fileUpload" class="btn btn-primary" /></center><br><br>
       <!-- <input type="submit" value="Upload File" name="submit" /> -->
 </form>
 <h3 align="center">Data</h3>
-<div id="tabledis"></div><br><br>
+<div id="tabledis"></div>
+<script src="../static/preview.js"></script>
 <div id="response"></div><br><br>
 <div id="chatbot"></div><br><br>
-<div id="chat1"></div><br><br>
+<div id="chat1">
+    <input type="text" id="inputbox">
+    <script type="text/javascript" src="../static/chat.js"></script>
+</div><br><br>
 <div id="chat3"></div><br><br>
 
-<script src="../static/script.js"></script>
+
 <!-- <button class="btn btn-primary" onclick="submit_data();">Submit</button> -->
 
 <!-- <div class="talk-bubble tri-right round right-top"><div class="talktext"><p>Hello check text</p></div></div> -->

@@ -135,6 +135,10 @@ def getanswer():
 	# print (answer())
 	return res
 
+@app.route('/audio')
+def audio():
+	return render_template("audio.html")
+
 if __name__ == '__main__': 
 	load_func()
 	app.run(debug=True) 
