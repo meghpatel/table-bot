@@ -7,9 +7,14 @@ body {
     color: rgba(255, 255, 255, 1);
     position: relative;
     max-height: 45vh;
-    margin-right: 40px;
-    overflow-y: scroll;
+    margin-right: 35px;
+    overflow-y: auto
+    ;
     scroll-behavior: smooth;
+}
+.chatwin{
+    height: 45vh;
+    align-content: center;
 }
 /* #scroller * {
     overflow-anchor: none;
@@ -39,7 +44,6 @@ body {
 .right {
     align-items: center;
     right: 0;
-    overflow-anchor: none;
 }
 
 .centered {
