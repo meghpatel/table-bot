@@ -2,8 +2,49 @@
 <html>
 <head>
 	<title>Audio Test</title>
+	<script src="https://kit.fontawesome.com/3da45b9264.js" crossorigin="anonymous"></script>
+	<!-- <script type="text/javascript" src="../static/fontawesome-free-5.13.0-web/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="../static/fontawesome-free-5.13.0-web/css/all.css"> -->
+	<link rel="stylesheet" type="text/css" href="../static/transform.css">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
+<!-- <audio></audio>io id="player" controls></audio> -->
+<!-- <br> <i id="play" class="fa fa-play"></i>
 
+<br> <i id="stop" class="fa fa-stop"></i>-->
+
+<button class="btn btn-primary" id="recordButton"> 
+<i id="play" class="fa fa-microphone"><p id="btnText">Record</p>
+</button>
+<button class="btn btn-primary hidden" id="stopButton"> 
+<i id="play" class="fa fa-stop"><p id="btnText">Stop</p>
+</button>
+
+<p id="response"></p>
+<!-- <button class="btn btn-primary" id="download">Download</button> -->
+<!-- <button class="btn btn-primary" id="stop">Stop</button> -->
+
+<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+<script type="text/javascript" src="../static/audio.js"></script>
+<!-- <audio id="player" controls></audio> -->
+
+<!-- <script>
+  const player = document.getElementById('player');
+
+  const handleSuccess = function(stream) {
+    if (window.URL) {
+      player.srcObject = stream;
+    } else {
+      player.src = stream;
+    }
+  };
+
+  navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+      .then(handleSuccess);
+
+
+</script> -->
 </body>
 </html>

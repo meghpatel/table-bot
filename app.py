@@ -7,6 +7,7 @@ import json
 from rivia import Rivia
 import webbrowser
 from threading import Timer
+import speech_recognition as sr
 
 app = Flask(__name__) 
 
@@ -141,10 +142,59 @@ def getanswer():
 def audio():
 	return render_template("audio.html")
 
+@app.route('/speech', methods = ['POST', 'PUT', 'GET'])
+def speech():
+	if request.method == 'GET':
+		print ("Request MEthod: "+str(s))
+		return "Wrong Method"
+	if request.method == 'POST':
+		# s = get_data()
+	# download_model(model='bert-squad_1.1', dir='./models')
+		# df = pd.read_csv('covid.csv', converters={'paragraphs': literal_eval})
+		# cdqa_pipeline = QAPipeline(reader='./models/bert_qa.joblib')
+		# cdqa_pipeline.fit_retriever(df=df)
+		print ("In post")
+		f = request.files['audio_data']
+		f.save(secure_filename(f.filename))
+		print ("Got the file.")
+		r=sr.Recognizer() 
+		file=sr.AudioFile('2.wav')
+		with file as source:
+		   audio = r.record(source)
+		#  Speech recognition using Google Speech Recognition
+		try:
+			recog = r.recognize_google(audio, language = 'en-US')
+			# for testing purposes, we're just using the default API key
+			# to use another API key, use r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")
+			# instead of `r.recognize_google(audio)`` 
+
+			print("You said: " + recog)
+			query = recog
+			# prediction = cdqa_pipeline.predict(recog)
+			ans = {"query" : query}
+			# print('query: {}'.format(query))
+			# print('answer: {}'.format(prediction[0]))
+			# print('title: {}'.format(prediction[1]))
+			# print('paragraph: {}'.format(prediction[2]))
+			res = json.dumps(ans)
+
+		except sr.UnknownValueError:
+			print("Google Speech Recognition could not understand audio")
+			res = "Google Speech Recognition could not understand audio"
+		except sr.RequestError as e:
+			print("Could not request results from Google Speech Recognition service; {0}".format(e)) 
+			res = "Could not request results from Google Speech Recognition service; {0}".format(e)
+
+		
+		return res
+	else:
+		return "No method"
+
 def open_browser():
 	path = '/usr/bin/google-chrome %s --incognito'
 	webbrowser.get(path).open_new('http://127.0.0.1:5000/audio')
 
 if __name__ == '__main__':
+	load_func()
 	Timer(1, open_browser).start();
 	app.run(debug=True) 
