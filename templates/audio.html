@@ -5,7 +5,8 @@
 	<script src="https://kit.fontawesome.com/3da45b9264.js" crossorigin="anonymous"></script>
 	<!-- <script type="text/javascript" src="../static/fontawesome-free-5.13.0-web/js/all.js"></script>
 	<link rel="stylesheet" type="text/css" href="../static/fontawesome-free-5.13.0-web/css/all.css"> -->
-	<link rel="stylesheet" type="text/css" href="../static/transform.css">
+	<!-- <link rel="stylesheet" type="text/css" href="../static/transform.css"> -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/transform.css') }}">
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
@@ -22,9 +23,13 @@
 <i id="play" class="fa fa-stop"><p id="btnText">Stop</p>
 </button>
 
-<p id="response"></p>
+<p id="response"></p><br>
 <!-- <button class="btn btn-primary" id="download">Download</button> -->
 <!-- <button class="btn btn-primary" id="stop">Stop</button> -->
+
+<audio controls>
+ 		<source src="{{ url_for('static', filename='welcome.mp3') }}" type="file/mpeg">
+</audio>
 
 <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
 <script type="text/javascript" src="../static/audio.js"></script>
