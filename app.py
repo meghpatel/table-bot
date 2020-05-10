@@ -8,6 +8,7 @@ from rivia import Rivia
 import webbrowser
 from threading import Timer
 import speech_recognition as sr
+from gtts import gTTS 
 
 app = Flask(__name__) 
 
@@ -148,17 +149,16 @@ def speech():
 		print ("Request MEthod: "+str(s))
 		return "Wrong Method"
 	if request.method == 'POST':
-		# s = get_data()
-	# download_model(model='bert-squad_1.1', dir='./models')
-		# df = pd.read_csv('covid.csv', converters={'paragraphs': literal_eval})
-		# cdqa_pipeline = QAPipeline(reader='./models/bert_qa.joblib')
-		# cdqa_pipeline.fit_retriever(df=df)
+
 		print ("In post")
+
 		f = request.files['audio_data']
 		f.save(secure_filename(f.filename))
 		print ("Got the file.")
+
 		r=sr.Recognizer() 
 		file=sr.AudioFile('2.wav')
+
 		with file as source:
 		   audio = r.record(source)
 		#  Speech recognition using Google Speech Recognition
@@ -171,11 +171,14 @@ def speech():
 			print("You said: " + recog)
 			query = recog
 			# prediction = cdqa_pipeline.predict(recog)
-			ans = {"query" : query}
-			# print('query: {}'.format(query))
-			# print('answer: {}'.format(prediction[0]))
-			# print('title: {}'.format(prediction[1]))
-			# print('paragraph: {}'.format(prediction[2]))
+			i=0
+			path = "static/audio/answer{}.mp3".format(i)
+			response_path = "../" + path
+
+			ans = {"query" : query,"path":response_path}
+			myobj = gTTS(text=query, lang='en', slow=False)
+			myobj.save(path) 
+			
 			res = json.dumps(ans)
 
 		except sr.UnknownValueError:

@@ -50,7 +50,14 @@ function createDownloadLink(blob) {
 	
 	var url = URL.createObjectURL(blob);
 	var filename = "12";
+	const au = document.createElement('audio');
+	const audio_chat = document.getElementById('audbox');
+	const audio_question = document.getElementById('audque');
+	const audio_response = document.getElementById('audres');
 	var xhr=new XMLHttpRequest();
+
+	au.controls = true;
+	au.src = url;
 
 	xhr.onload=function(e) {
 		if(this.readyState === 4) {
@@ -59,6 +66,10 @@ function createDownloadLink(blob) {
 			var response = JSON.parse(str);
 			const answer = document.getElementById('response');
 			answer.textContent = response.query;
+			aur = document.createElement('audio');
+			aur.controls = true;
+			aur.src = response.path;
+			audio_response.appendChild(aur);
 		}
 	};
 
@@ -66,4 +77,5 @@ function createDownloadLink(blob) {
 	fd.append("audio_data",blob, "2.wav");
 	xhr.open("POST","/speech");
 	xhr.send(fd);
+	audio_question.appendChild(au);
 }
