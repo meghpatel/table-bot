@@ -77,7 +77,7 @@ class Rivia:
 			  "question": question
 			}
 
-			result = predictor.predict_json(data)
+			result = predictor.predict_batch_json(data)
 			print(result["answer"])
 			return result, self.type
 		
@@ -117,7 +117,10 @@ class Rivia:
 		fd=open("data/final_output.txt","w+")
 		if self.type == 'table':
 			m=d.split("\n")
-			s="\n".join(m[:-1])
+			# for jj in m:
+			# 	if jj != ' ':
+			# 		s = "\n".join(jj)
+			s="\n".join(m[:-2])
 			for i in range(len(s)):
 				fd.write(s[i])
 		else:

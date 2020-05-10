@@ -26,7 +26,10 @@ const chat = event => {
 		cb.appendChild(que);
 		cb.appendChild(document.createElement("br"));
 
-
+		// //get container element
+		// var container = document.getElementById("splitright");
+		// //scroll down
+		// container.scrollTop = container.scrollHeight;
 
 		// response.innerHTML = query;
 		inp.value = ''
@@ -61,9 +64,10 @@ const chat = event => {
 			response_bubble.appendChild(resbub_text);
 			cb.appendChild(response_bubble);
 			cb.appendChild(document.createElement("br"));
-
 			// reply.innerHTML = data
 			// reply.style['text-align'] = "right";
+			var element = document.getElementsByClassName("centered")[0];
+  			element.scrollTop = element.scrollHeight;
 		});
 	}
 }
