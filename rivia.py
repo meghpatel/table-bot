@@ -102,7 +102,7 @@ class Rivia:
 	def process_file(self, path,filetype):
 		self.type=filetype
 		if self.type == 'table':
-			csv.writer(open("data/output.txt", 'w+'), delimiter='\t').writerows(csv.reader(open(path)))
+			csv.writer(open("data/output.txt", 'w+',newline='\n'), delimiter='\t').writerows(csv.reader(open(path)))
 			
 		else:
 			file = open("data/output.txt", "w+")
@@ -114,7 +114,7 @@ class Rivia:
 		d=fd.read()
 		fd.close()
 		
-		fd=open("data/final_output.txt","w+")
+		fd=open("data/final_output.txt","w+",newline='\n')
 		if self.type == 'table':
 			m=d.split("\n")
 			s="\n".join(m[:-1])
