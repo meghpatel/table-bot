@@ -70,9 +70,7 @@ body {
 .centered {
     position: relative;
     overflow: auto;
-  }
-  
-
+}
 div.shadow {
     border: 1px solid #ccc;
     border-radius: 10px;
