@@ -145,6 +145,7 @@ input.tdinput
   border: 2px dashed #ccc;
   border-radius: 20px;
   width: 480px;
+  height: 40%;
   font-family: sans-serif;
   margin: 100px auto;
   padding: 20px;
@@ -178,6 +179,24 @@ p {
 .button:hover {
   background: #ddd;
 }
-#fileElem {
-  display: none;
+
+input[type="file"] {
+    display: none;
+}
+/*
+#fileUpload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin: auto;
+    margin-top: 10%;
+}*/
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin-left: 40%;
+    margin-top: 10%;
 }

@@ -22,14 +22,18 @@
 <body>
 <h1 class="text-center app-header">Rivia</h2>
 <br>
-<form method="post" enctype="multipart/form-data" >
-      <center><input type="file" id="fileUpload" class="btn btn-primary" /></center><br><br>
-      <!-- <input type="submit" value="Upload File" name="submit" /> -->
-</form>
 
 <div style="overflow: auto;">
     <div class="split left">
         <h3 align="center" style="position: relative;">Data</h3>
+        <div id="drop-area">
+            <form method="post" enctype="multipart/form-data" >
+                <label for="fileUpload" class="custom-file-upload">
+                    <i class="fa fa-cloud-upload"></i> Upload
+                </label>
+              <input type="file"  id="fileUpload"/>
+            </form>
+        </div>
         <div id="tabledis" class="centered"></div>
     </div>
 
@@ -61,14 +65,6 @@
 </div>
 <br><br>
 <div id="chat3"></div><br><br>
-
-
-<!-- <button class="btn btn-primary" onclick="submit_data();">Submit</button> -->
-
-<!-- <div class="talk-bubble tri-right round right-top"><div class="talktext"><p>Hello check text</p></div></div> -->
-
-<!-- <a class="github-button" href="https://github.com/vendi12/MemN2N-tableQA" data-size="large" aria-label="Get source on GitHub">Source</a> -->
-
     
 </body>
 </html>

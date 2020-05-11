@@ -216,7 +216,7 @@ def speech():
 
 def open_browser():
 	path = '/usr/bin/google-chrome %s --incognito'
-	webbrowser.get(path).open_new('http://127.0.0.1:5000/audio')
+	webbrowser.get(path).open_new('http://127.0.0.1:5000')
 
 if __name__ == '__main__':
 	load_func()
