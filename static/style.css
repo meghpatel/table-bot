@@ -52,6 +52,7 @@ body {
     z-index: 1;
     top: 1;
     padding-top: 20px;
+    overflow-y: auto;
 }
   
 /* Control the left side */
