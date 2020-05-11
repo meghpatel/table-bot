@@ -9,6 +9,6 @@
 ```conda activate allennlp```<br>
 <br>
 4) Install other requirements<br>
-```pip install -r requirements.txt```
-<br>
+
+```pip install -r requirements.txt```<br>
 ```python app.py```
