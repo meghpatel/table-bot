@@ -3,6 +3,74 @@ body {
     font-family: 'Lobster', sans-serif;
 }
 
+#chatbot {
+    color: rgba(255, 255, 255, 1);
+    position: relative;
+    max-height: 45vh;
+    margin-right: 35px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(255,0,0,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(255,0,0,0.4); 
+}	
+.chatwin{
+    height: 45vh;
+    align-content: center;
+}
+/* #scroller * {
+    overflow-anchor: none;
+}
+
+#anchor{
+    overflow-anchor: auto;
+    height: 1px;
+} */
+
+.split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 1;
+    padding-top: 20px;
+    overflow-y: auto;
+}
+  
+/* Control the left side */
+.left {
+    left: 0;
+    height: 75%;
+}
+
+/* Control the right side */
+.right {
+    align-items: center;
+    right: 0;
+}
+
+.centered {
+    position: relative;
+    overflow: auto;
+}
 div.shadow {
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -43,7 +111,7 @@ input.tdinput
 }
 
 .qa-form .btn {
-    width: 200px;
+    width: 400px;
 }
 
 .qa-form .form-control {
@@ -62,3 +130,5 @@ input.tdinput
     margin-left: auto;
     margin-right: auto;
 }
+
+

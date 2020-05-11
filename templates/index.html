@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Rivia</title>
-
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- <link href="https://svakulenko.ai.wu.ac.at/tableqastatic/style.css" rel="stylesheet"> -->
-    <link href="../static/style.css" rel="stylesheet">
-    <link href="../static/chat.css" rel="stylesheet">
-
+    <link href="static/style.css" rel="stylesheet">
+    <link href="static/chat.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <!-- <script src="https://svakulenko.ai.wu.ac.at/tableqastatic/script.js"></script> -->
@@ -27,15 +24,33 @@
       <center><input type="file" id="fileUpload" class="btn btn-primary" /></center><br><br>
       <!-- <input type="submit" value="Upload File" name="submit" /> -->
 </form>
-<h3 align="center">Data</h3>
-<div id="tabledis"></div>
-<script src="../static/preview.js"></script>
-<div id="response"></div><br><br>
-<div id="chatbot"></div><br><br>
-<div id="chat1">
-    <input type="text" id="inputbox">
-    <script type="text/javascript" src="../static/chat.js"></script>
-</div><br><br>
+
+<div style="overflow: auto;">
+    <div class="split left">
+        <h3 align="center" style="position: relative;">Data</h3>
+        <div id="tabledis" class="centered"></div>
+    </div>
+
+    <script src="../static/preview.js"></script>
+
+
+    <div class="split right" id ='splitright'>
+        <h3 align="center" style="position: relative;">Chat</h3>
+        <div class='chatwin'>
+            <div id="chatbot" >
+            </div>
+        </div>    
+        
+    
+        <br><br>
+
+        <div id="chat1">
+            <input type="text" id="inputbox" placeholder="Type here...">
+            <script type="text/javascript" src="../static/chat.js"></script>
+        </div>
+    </div>
+</div>
+<br><br>
 <div id="chat3"></div><br><br>
 
 
