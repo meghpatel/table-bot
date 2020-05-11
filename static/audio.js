@@ -15,7 +15,8 @@ stopButton.addEventListener("click", stopRecording);
 function startRecording() {
 	console.log("recordButton clicked");
 	stopButton.classList = 'btn btn-primary';
-	recordButton.classList = 'hidden';
+	stopButton.style.display = "inline-block";
+	recordButton.style.display = "none";
 	var constraints = { audio: true, video:false }
 
 	navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
@@ -40,7 +41,8 @@ function stopRecording() {
 	rec.stop();
 	gumStream.getAudioTracks()[0].stop();
 	recordButton.classList = 'btn btn-primary';
-	stopButton.classList = 'hidden';
+	recordButton.style.display = "inline-block";
+	stopButton.style.display = 'none';
 	rec.exportWAV(createDownloadLink);
 }
 

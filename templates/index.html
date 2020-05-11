@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Rivia</title>
+    <!-- <script src="https://kit.fontawesome.com/3da45b9264.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- <link href="https://svakulenko.ai.wu.ac.at/tableqastatic/style.css" rel="stylesheet"> -->
@@ -46,6 +48,13 @@
 
         <div id="chat1">
             <input type="text" id="inputbox" placeholder="Type here...">
+            <button class="btn btn-primary" id="recordButton" style="display: none;"> 
+                <i class="fa fa-microphone"></i>
+            </button>
+            <button class="btn btn-primary" id="stopButton" style="display: none;"> 
+                <i class="fa fa-stop"></i>
+            </button>
+            <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
             <script type="text/javascript" src="../static/chat.js"></script>
         </div>
     </div>

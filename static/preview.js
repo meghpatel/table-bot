@@ -25,9 +25,12 @@ const handleUpload = event => {
 	    document.getElementById('tabledis').innerHTML = data.ans;
 	    const box = document.getElementById('chat1');
 	    const inp = document.getElementById("inputbox");
+	    const rec_btn = document.getElementById("recordButton");
+
+	    rec_btn.style.display = "inline";
 	    inp.setAttribute('type','text');
 	    inp.setAttribute('size',50);
-	    inp.style.display = "block";
+	    inp.style.display = "inline";
 	    inp.focus();
 	    // inp.setAttribute('id','inputbox')
 	    // box.appendChild(inp);

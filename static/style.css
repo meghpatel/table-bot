@@ -131,4 +131,12 @@ input.tdinput
     margin-right: auto;
 }
 
+#stopButton{
+    display: inline-block;
+    border-radius: 50%;
+}
 
+#recordButton{
+    display: inline-block;
+    border-radius: 50%;
+}
