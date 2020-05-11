@@ -59,7 +59,7 @@ function createDownloadLink(blob) {
 	
 	var url = URL.createObjectURL(blob);
 	var filename = "12";
-	// const au = document.createElement('audio');
+	const au = document.createElement('audio');
 	// const audio_chat = document.getElementById('audbox');
 	// const audio_question = document.getElementById('audque');
 	// const audio_response = document.getElementById('audres');
@@ -85,9 +85,11 @@ function createDownloadLink(blob) {
 			
 			pageHeight = pageHeight + 5000;
   			$('#chatbot').scrollTop(pageHeight);
-			// aur = document.createElement('audio');
-			// aur.controls = true;
-			// aur.src = response.path;
+			aur = document.createElement('audio');
+			aur.controls = true;
+			aur.src = response.path;
+			aur.autoplay = true;
+			aur.style.display = "none";
 			// audio_response.appendChild(aur);
 		}
 	};

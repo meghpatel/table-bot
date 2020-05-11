@@ -8,7 +8,6 @@ const handleUpload = event => {
 	console.log(url);
 
 	const files = event.target.files
-	// var form = document.querySelector('form');
 	const formData = new FormData()
 	console.log('file',files);
 	formData.append('table', files[0], files[0].name)
@@ -19,9 +18,8 @@ const handleUpload = event => {
 		body: formData
 	}).then(response => response.json())
 	.then(data => {
+
 		console.log(data)
-		// html = JSON.parse(data);
-// 	    console.log(data.ans)
 	    document.getElementById('tabledis').innerHTML = data.ans;
 	    const box = document.getElementById('chat1');
 	    const inp = document.getElementById("inputbox");
@@ -32,8 +30,6 @@ const handleUpload = event => {
 	    inp.setAttribute('size',50);
 	    inp.style.display = "inline";
 	    inp.focus();
-	    // inp.setAttribute('id','inputbox')
-	    // box.appendChild(inp);
 	    box.style['text-align'] = 'center';
 	  })
 	.catch(error => {
