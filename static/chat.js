@@ -5,12 +5,14 @@ document.querySelector('#inputbox').addEventListener('keyup', event => {
 
 const chat = event => {
 	const url1 = `${window.origin}/getanswer`;
+
+	var pageHeight = $('#chatbot').height();
+
 	if (event.keyCode === 13) {
 		event.preventDefault();
 		console.log("Click");
 
 		inp = document.querySelector('#inputbox');
-
 		let query = inp.value;
 
 		//Creating a Chatbubble
@@ -25,7 +27,8 @@ const chat = event => {
 		que.appendChild(que_text);
 		cb.appendChild(que);
 		cb.appendChild(document.createElement("br"));
-
+		pageHeight = pageHeight + 5000;
+  		$('#chatbot').scrollTop(pageHeight);
 		// //get container element
 		// var container = document.getElementById("splitright");
 		// //scroll down
@@ -52,7 +55,7 @@ const chat = event => {
 			// console.log(typeof(data))
 			// const obj = JSON.parse(data)
 
-
+			
 			//Creating response bubble
 			const response_bubble = document.createElement('div');
 			response_bubble.className = 'talk-bubble tri-right round right-top' ;
@@ -64,10 +67,12 @@ const chat = event => {
 			response_bubble.appendChild(resbub_text);
 			cb.appendChild(response_bubble);
 			cb.appendChild(document.createElement("br"));
+			pageHeight = pageHeight + 5000;
+  			$('#chatbot').scrollTop(pageHeight);
 			// reply.innerHTML = data
 			// reply.style['text-align'] = "right";
-			var element = document.getElementsByClassName("centered")[0];
-  			element.scrollTop = element.scrollHeight;
+
+			
 		});
 	}
 }
