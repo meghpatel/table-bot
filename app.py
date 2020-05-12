@@ -218,7 +218,7 @@ def open_browser():
 	path = '/usr/bin/google-chrome %s --incognito'
 	webbrowser.get(path).open_new('http://127.0.0.1:5000')
 
-if __name__ == '__main__':
-	load_func()
-	Timer(1, open_browser).start();
-	app.run(debug=True) 
+# if __name__ == '__main__':
+# 	load_func()
+# 	Timer(1, open_browser).start();
+# 	app.run(debug=True) 
