@@ -76,7 +76,7 @@ class Rivia:
 			  "table": table,
 			  "question": question
 			}
-
+			print(data['question'])
 			result = predictor.predict_json(data)
 			print(result["answer"])
 			return result, self.type

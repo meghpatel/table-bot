@@ -19,7 +19,7 @@ app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
 RECORDED_FILES_PATH = 'static/audio/'
 
 current_file = 'data/output.tsv'
-app = Flask(__name__, static_folder='static')
+# app = Flask(__name__, static_folder='static')
 
 rivia = None
 typefile = str()
@@ -81,9 +81,9 @@ def compute_results(question):
 
 
 # @app.before_first_request(load_func())	  
-# @app.route('/')
-# def index():
-# 	return render_template('homepage.html')
+@app.route('/')
+def index():
+	return render_template('homepage.html')
 
 @app.route('/home') 
 def home():
@@ -152,10 +152,6 @@ def getanswer():
 def audio():
 	return render_template("audio.html")
 
-# @app.route('/wikiqa')
-# def wikiqa():
-# 	return render_template('wikiqa.html')
-if __name__ == '__main__': 
 @app.route('/speech', methods = ['POST', 'PUT', 'GET'])
 def speech():
 	if request.method == 'GET':
@@ -224,6 +220,10 @@ def speech():
 def open_browser():
 	path = '/usr/bin/google-chrome %s --incognito'
 	webbrowser.get(path).open_new('http://127.0.0.1:5000')
+
+@app.route('/wikiqa')
+def wikiqa():
+	return render_template('wikiqa.html')
 
 if __name__ == '__main__':
 	load_func()
