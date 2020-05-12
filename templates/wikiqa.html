@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rivia</title>
+    <title>Wiki data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- <link href="https://svakulenko.ai.wu.ac.at/tableqastatic/style.css" rel="stylesheet"> -->
-    <!-- <link href="static/style.css" rel="stylesheet"> -->
+    <link href="static/style.css" rel="stylesheet">
     <link href="static/chat.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
@@ -18,19 +19,28 @@
 </head>
  
 <body>
-    <h1 class="text-center app-header ">Rivia</h1>
+    <h1 class="text-center app-header ">Covid-19 Wiki-data</h1>
     <br>
-    <h3 align="center" style="position: relative;">Chat</h3>
-    <div class='chatwin'>
-        <div id="chatbot" >
-        </div>
-    </div>    
-    
-    <br><br>
+    <div style="overflow: auto; align-items: center;">
+        <h3 align="center" style="position: relative;">Chat</h3>
+        <div class='chatwin'>
+            <div id="chatbot" >
+            </div>
+        </div>    
+        
+        <br><br>
 
-    <div id="chat1">
-        <input type="text" id="inputbox" placeholder="Type here...">
-        <script type="text/javascript" src="../static/chat.js"></script>
+        <div id="chat1">
+            <input type="text" id="inputbox" placeholder="Type here...">
+            <button class="btn btn-primary" id="recordButton" style="display: none;"> 
+                <i class="fa fa-microphone"></i>
+            </button>
+            <button class="btn btn-primary" id="stopButton" style="display: none;"> 
+                <i class="fa fa-stop"></i>
+            </button>
+            <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+            <script type="text/javascript" src="../static/chat.js"></script>
+        </div>
     </div>
 </body>
 </html>
