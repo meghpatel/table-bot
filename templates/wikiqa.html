@@ -21,26 +21,29 @@
 <body>
     <h1 class="text-center app-header ">Covid-19 Wiki-data</h1>
     <br>
-    <div style="overflow: auto; align-items: center;">
+
+    <div class="split right" id ='splitright'>
         <h3 align="center" style="position: relative;">Chat</h3>
         <div class='chatwin'>
             <div id="chatbot" >
             </div>
         </div>    
-        
+
         <br><br>
 
         <div id="chat1">
-            <input type="text" id="inputbox" placeholder="Type here...">
+            <input type="text" id="inputbox" style="margin-left: 30%;" placeholder="Type here...">
             <button class="btn btn-primary" id="recordButton" style="display: none;"> 
                 <i class="fa fa-microphone"></i>
             </button>
             <button class="btn btn-primary" id="stopButton" style="display: none;"> 
                 <i class="fa fa-stop"></i>
             </button>
-            <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
-            <script type="text/javascript" src="../static/chat.js"></script>
+            
         </div>
+        <script src="../static/wikiqa.js"></script>
+        <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+        <script type="text/javascript" src="../static/chat.js"></script>
     </div>
 </body>
 </html>

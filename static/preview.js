@@ -63,6 +63,7 @@ const handleUpload = files => {
 	console.log('file',files);
 	formData.append('table', files[0], files[0].name)
 	console.log('formdata',formData)
+	print(formData)
 
 	fetch(url, {
 		method: 'POST',

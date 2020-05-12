@@ -10,6 +10,10 @@ from threading import Timer
 import speech_recognition as sr
 from gtts import gTTS 
 import regex as re
+import requests
+import numpy as np
+from bs4 import BeautifulSoup
+import csv
 
 app = Flask(__name__) 
 
@@ -148,6 +152,78 @@ def getanswer():
 	# print (answer())
 	return res
 
+@app.route('/uploadwiki', methods=['POST', 'GET'])
+def uploadwiki():
+	url = 'https://en.wikipedia.org/wiki/COVID-19_pandemic_by_country_and_territory#covid19-container'
+	r = requests.get(url)
+
+	soup = BeautifulSoup(r.content, 'html.parser')
+
+	rows = soup.select('#thetable tr')
+
+	#header-----
+	header1 = rows[0].select('th')
+	header = ['#']
+	for i in range(0,len(header1)-1):
+		x = header1[i].text.strip()
+		header.append(x[:-3])
+
+	#totalsum
+	total1 = rows[1].select('th')
+	total = ['Total']
+	for i in range(0,len(total1)-1):
+		x = total1[i].text.strip()
+		total.append(x)
+
+	#data-----
+	data = []
+	for x in range(2,len(rows)):
+		row = [x-1]
+		
+		rr = rows[x].select('th a')
+		for ir in rr:
+			z = str(ir.string)
+			if z[0] != '[':
+				row.append(z)
+			
+		rrdata = rows[x].select('td')
+		for i in range(0,len(rrdata)-1):
+			ii = rrdata[i].text.strip()
+			if ii == 'No data':
+				ii = 'NA'
+			row.append(ii)
+		data.append(row)
+
+	data = data[:227]
+	finaldata = np.vstack((header,total))
+	data = np.array((data))
+	print(finaldata)
+	print(finaldata.shape)
+	finaldata = np.concatenate((finaldata,data),0)
+
+	with open('data/wikitable.csv', 'w', newline='') as myfile:
+		wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+		wr.writerows(finaldata)
+
+	path = 'data/wikitable.csv'	
+	print ('Table loaded')
+	typefile = 'table'	
+	rivia.process_file(path,typefile)
+	
+	if typefile == 'table':
+		df = pd.read_csv(path)
+		print (df.shape)
+		ans = df.to_html(bold_rows=True,classes="table table-hover thead-light table-striped")
+	else:
+		f = open(path,'r+').read()
+		ans = "<h4 style=\"margin-left:50px;margin-right:50px\">"+f+"</h4>"
+
+	resp = {"ans":ans}
+
+@app.route('/wikiqa')
+def wikiqa():
+	return render_template('wikiqa.html')
+
 @app.route('/audio')
 def audio():
 	return render_template("audio.html")
@@ -220,10 +296,6 @@ def speech():
 def open_browser():
 	path = '/usr/bin/google-chrome %s --incognito'
 	webbrowser.get(path).open_new('http://127.0.0.1:5000')
-
-@app.route('/wikiqa')
-def wikiqa():
-	return render_template('wikiqa.html')
 
 if __name__ == '__main__':
 	load_func()
