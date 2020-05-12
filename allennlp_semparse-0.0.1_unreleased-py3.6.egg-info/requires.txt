@@ -1,0 +1,6 @@
+parsimonious>=0.8.0
+sqlparse>=0.2.4
+unidecode
+editdistance
+nltk
+allennlp@ git+ssh://git@github.com/allenai/allennlp@28028a0544632307fe48e66a15a4b2a22c3dddda#egg=allennlp
