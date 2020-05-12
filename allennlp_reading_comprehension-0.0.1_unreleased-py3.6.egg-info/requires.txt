@@ -1,3 +1,0 @@
-word2number>=1.1
-py-rouge==1.1
-allennlp@ git+https://github.com/allenai/allennlp@ff3ed1c89ed10e55da5532ad3fcde9d89747d431#egg=allennlp
