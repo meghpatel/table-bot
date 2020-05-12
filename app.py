@@ -13,6 +13,7 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'csv','tsv'}
 app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
 
 current_file = 'data/output.tsv'
+app = Flask(__name__, static_folder='static')
 
 rivia = None
 typefile = str()
@@ -63,8 +64,11 @@ def answer(query):
 
 
 # @app.before_first_request(load_func())	  
+# @app.route('/')
+# def index():
+# 	return render_template('homepage.html')
 
-@app.route('/') 
+@app.route('/home') 
 def home():
 	return render_template("index.html")
 
@@ -84,7 +88,6 @@ def home():
 
 @app.route('/upload', methods=['POST', 'GET'])
 def upload():
-	
 	if request.method == 'POST':
 		f = request.files['table']
 		if f and allowed_file(f.filename):
@@ -139,6 +142,9 @@ def getanswer():
 def audio():
 	return render_template("audio.html")
 
+# @app.route('/wikiqa')
+# def wikiqa():
+# 	return render_template('wikiqa.html')
 if __name__ == '__main__': 
 	load_func()
 	app.run(debug=True) 
