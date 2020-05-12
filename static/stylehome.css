@@ -1,0 +1,46 @@
+* {
+    box-sizing: border-box;
+  }
+  
+body {
+    margin: 0;
+    font-family: Arial;
+    font-size: 17px;
+}
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+  /* Add some content at the bottom of the video/page */
+.content {
+    position: relative;
+    /* background: rgb(255, 99, 71,0.7); */
+    /* rgba(255,255,255, 1); */
+    width: 50%;
+    padding: 20px;
+    border-radius: 20px;
+    margin-top: 11%;
+    margin-left: 25%;
+}
+
+/* Style the button used to pause/play the video */
+.btn-homepage {
+    width: 180px;
+    font-size: 20px;
+    padding: 10px;
+    font-style: bold;
+    border: none;
+    background:rgb(0,0,0,0);
+    color: white;
+    /* color: rgb(235, 200, 5); */
+    cursor: pointer;
+}
+
+.btn-homepage:hover {
+    background: rgb(235, 200, 5);
+    color: #fff;
+
+}
