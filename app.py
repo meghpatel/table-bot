@@ -5,12 +5,18 @@ import os
 import csv
 import json 
 from rivia import Rivia
+import webbrowser
+from threading import Timer
+import speech_recognition as sr
+from gtts import gTTS 
+import regex as re
 
 app = Flask(__name__) 
 
 app.config['UPLOAD_FOLDER'] = 'data/'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'csv','tsv'}
 app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
+RECORDED_FILES_PATH = 'static/audio/'
 
 current_file = 'data/output.tsv'
 app = Flask(__name__, static_folder='static')
@@ -56,6 +62,17 @@ def answer(query):
 	# print (str(reply))
 	# print (type(result['answer']))
 	return str(reply)
+
+def compute_results(question):
+	result,typefile = rivia.rivia_predict(question)
+	print(typefile)
+	if typefile == 'table':
+		print(result["logical_form"][0])
+		ans = rivia.correct_answer(result['answer'])
+	else:
+		print(result["best_span_str"])
+		ans = result["best_span_str"]
+	return ans
 
 
 # def check_name():
@@ -124,16 +141,9 @@ def getanswer():
 	print(req)
 	# reply = answer(req['query'])
 	
-	result,typefile = rivia.rivia_predict(req['query'])
-	print(typefile)
-	if typefile == 'table':
-		print(result["logical_form"][0])
-		ans = rivia.correct_answer(result['answer'])
-	else:
-		print(result["best_span_str"])
-		ans = result["best_span_str"]
+	
 	# reply = {"answer":ans}
-
+	ans = compute_results(req['query'])
 	res = make_response(jsonify(ans), 200)
 	# print (answer())
 	return res
@@ -146,5 +156,76 @@ def audio():
 # def wikiqa():
 # 	return render_template('wikiqa.html')
 if __name__ == '__main__': 
+@app.route('/speech', methods = ['POST', 'PUT', 'GET'])
+def speech():
+	if request.method == 'GET':
+		print ("Request MEthod: "+str(s))
+		return "Wrong Method"
+	if request.method == 'POST':
+
+		print ("In post")
+
+		f = request.files['audio_data']
+		print (f)
+		path = os.path.join(RECORDED_FILES_PATH, secure_filename(f.filename))
+		f.save(path)
+		# f.save(secure_filename(f.filename))
+
+		regex = re.compile(r'[0-9]')
+		message_number = regex.findall(secure_filename(f.filename))[0]
+
+
+		print ("Got the file.")
+
+		r=sr.Recognizer() 
+		file=sr.AudioFile(path)
+
+		with file as source:
+		   audio = r.record(source)
+		#  Speech recognition using Google Speech Recognition
+		try:
+			recog = r.recognize_google(audio, language = 'en-US')
+			# for testing purposes, we're just using the default API key
+			# to use another API key, use r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")
+			# instead of `r.recognize_google(audio)`` 
+
+			print("You said: " + recog)
+			query = recog
+
+			answer = compute_results(query)
+			print ("Answer",answer)
+			print (type(answer))
+			# i = 0
+			path = "static/audio/answer_{}.mp3".format(message_number)
+			response_path = "../" + path
+
+			ans = {"query" : query,"path":response_path, "textres":answer, "status":"OK"}
+			myobj = gTTS(text=str(answer), lang='en', slow=False)
+			myobj.save(path) 
+			
+			res = json.dumps(ans)
+
+		except sr.UnknownValueError:
+			print("Google Speech Recognition could not understand audio")
+			ans = {"query":"Sorry, I don't quite understand what you said.", "status":"NOT OK"}
+			res = json.dumps(ans)
+
+
+		except sr.RequestError as e:
+			print("Could not request results from Google Speech Recognition service; {0}".format(e)) 
+			ans = {"query":"Sorry, We can't process your speech at this moment. Kindly use text input.", "status":"NOT OK"}
+			res = json.dumps(ans)
+
+		
+		return res
+	else:
+		return "No method"
+
+def open_browser():
+	path = '/usr/bin/google-chrome %s --incognito'
+	webbrowser.get(path).open_new('http://127.0.0.1:5000')
+
+if __name__ == '__main__':
 	load_func()
+	Timer(1, open_browser).start();
 	app.run(debug=True) 

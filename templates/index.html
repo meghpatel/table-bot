@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Rivia</title>
+    <!-- <script src="https://kit.fontawesome.com/3da45b9264.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- <link href="https://svakulenko.ai.wu.ac.at/tableqastatic/style.css" rel="stylesheet"> -->
@@ -20,14 +22,18 @@
 <body>
 <h1 class="text-center app-header">Rivia</h2>
 <br>
-<form method="post" enctype="multipart/form-data" >
-      <center><input type="file" id="fileUpload" class="btn btn-primary" /></center><br><br>
-      <!-- <input type="submit" value="Upload File" name="submit" /> -->
-</form>
 
 <div style="overflow: auto;">
     <div class="split left">
         <h3 align="center" style="position: relative;">Data</h3>
+        <div id="drop-area">
+            <form method="post" enctype="multipart/form-data" >
+                <label for="fileUpload" class="custom-file-upload">
+                    <i class="fa fa-cloud-upload"></i> Upload
+                </label>
+              <input type="file"  id="fileUpload"/>
+            </form>
+        </div>
         <div id="tabledis" class="centered"></div>
     </div>
 
@@ -46,20 +52,19 @@
 
         <div id="chat1">
             <input type="text" id="inputbox" placeholder="Type here...">
+            <button class="btn btn-primary" id="recordButton" style="display: none;"> 
+                <i class="fa fa-microphone"></i>
+            </button>
+            <button class="btn btn-primary" id="stopButton" style="display: none;"> 
+                <i class="fa fa-stop"></i>
+            </button>
+            <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
             <script type="text/javascript" src="../static/chat.js"></script>
         </div>
     </div>
 </div>
 <br><br>
 <div id="chat3"></div><br><br>
-
-
-<!-- <button class="btn btn-primary" onclick="submit_data();">Submit</button> -->
-
-<!-- <div class="talk-bubble tri-right round right-top"><div class="talktext"><p>Hello check text</p></div></div> -->
-
-<!-- <a class="github-button" href="https://github.com/vendi12/MemN2N-tableQA" data-size="large" aria-label="Get source on GitHub">Source</a> -->
-
     
 </body>
 </html>

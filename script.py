@@ -11,6 +11,7 @@ from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 import pandas as pd
 from rivia import Rivia
+from gtts import gTTS 
 
 r = Rivia('table')
 r.what()
@@ -34,11 +35,14 @@ r.say_hello('Megh')
 # for i in range(len(s)):
 #     fd.write(s[i])
 # fd.close()
-question = "Which country have more than 5000 deaths?"
-result = r.rivia_predict(question)
-print(result["logical_form"][0])
+# question = "Which country have more than 5000 deaths?"
+# result = r.rivia_predict(question)
+# print(result["logical_form"][0])
 
-ans = r.correct_answer(result['answer'])
+# ans = r.correct_answer(result['answer'])
+
+myobj = gTTS(text="Hello, How are you?", lang='en', slow=False)
+myobj.save("static/welcome.mp3") 
 # print (final_answer)
 # reply = {'answer':result['answer']}
 # print (type(jsonify(reply)))
