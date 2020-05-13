@@ -85,6 +85,9 @@ def compute_results(question):
 def home():
 	return render_template("index.html")
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static', 'images'), 'favicon.ico', mimetype='image/png')
 # @app.route('/getdata', methods=['GET', 'POST'])
 # def getdata():
 # 	@after_this_request
