@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>
+            Rivia-Home
+        </title>
+        <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+        <!-- <link href="https://svakulenko.ai.wu.ac.at/tableqastatic/style.css" rel="stylesheet"> -->
+        <link href="static/stylehome.css" rel="stylesheet">
+        <link href="static/chat.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two" rel="stylesheet" type="text/css">
+        <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Cherry Swash' rel='stylesheet'>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+        <!-- For background video
+            <video autoplay muted loop id="myVideo">
+            <source src='{{ url_for("static", filename="tunnel.mp4") }}' type="video/mp4">
+                Your browser does not support the video tag.        
+        </video> -->
+        <div class="content">
+            
+            <h1 class="text-center app-header" style="color:rgb(7, 75, 60);font-size:95px;font-weight: 700;font-family:Cherry Swash;">Rivia</h1>                    
+            <br>
+                <center>
+                    <button type="button" class="btn-primary btn-lg btn-homepage" onclick="window.location.href='{{ url_for( 'home' ) }}'" class="btn btn-primary">Upload data</button>
+                    <br><br>
+                    <button type="button" class="btn-primary btn-lg btn-homepage" onclick="window.location.href='{{ url_for( 'wikiqa' ) }}'" class="btn btn-primary">Wiki data</button>
+                </center>
+                <br>
+        </div>
+    </body>
+</html>

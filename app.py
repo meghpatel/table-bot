@@ -10,6 +10,10 @@ from threading import Timer
 import speech_recognition as sr
 from gtts import gTTS 
 import regex as re
+import requests
+import numpy as np
+from bs4 import BeautifulSoup
+import csv
 
 app = Flask(__name__) 
 
@@ -19,15 +23,10 @@ app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
 RECORDED_FILES_PATH = 'static/audio/'
 
 current_file = 'data/output.tsv'
+# app = Flask(__name__, static_folder='static')
 
 rivia = Rivia()
 typefile = str()
-
-# @app.before_first_request
-# def load_func():
-# 	global rivia
-# 	rivia = Rivia()
-# 	rivia.what()
 
 def allowed_file(filename):
 	return '.' in filename and \
@@ -51,8 +50,11 @@ def compute_results(question):
 
 
 # @app.before_first_request(load_func())	  
+@app.route('/')
+def index():
+	return render_template('homepage.html')
 
-@app.route('/') 
+@app.route('/home') 
 def home():
 	# load_func()
 	return render_template("index.html")
@@ -76,7 +78,6 @@ def home():
 
 @app.route('/upload', methods=['POST', 'GET'])
 def upload():
-	
 	if request.method == 'POST':
 		f = request.files['table']
 		if f and allowed_file(f.filename):
@@ -92,13 +93,9 @@ def upload():
 			elif extention in ['txt']:
 				print ('Passage loaded')
 				rivia.type = 'passage'		
-			print (f'Type is {rivia.type}')
-			print (type(rivia.type))
-			print (rivia.type == 'table')
 			rivia.process_file(path,rivia.type)
 			
 			if rivia.type == 'table':
-				print ("Inside IFFF")
 				df = pd.read_csv(path)
 				print (df.shape)
 				ans = df.to_html(bold_rows=True,classes="table table-hover thead-light table-striped")
@@ -126,6 +123,73 @@ def getanswer():
 	res = make_response(jsonify(ans), 200)
 	# print (answer())
 	return res
+
+@app.route('/uploadwiki', methods=['POST', 'GET'])
+def uploadwiki():
+	url = 'https://en.wikipedia.org/wiki/COVID-19_pandemic_by_country_and_territory#covid19-container'
+	r = requests.get(url)
+
+	soup = BeautifulSoup(r.content, 'html.parser')
+
+	rows = soup.select('#thetable tr')
+
+	#header-----
+	header1 = rows[0].select('th')
+	header = ['#','Country','Cases','Deaths','Recovery']
+	# for i in range(0,len(header1)-1):
+	# 	x = header1[i].text.strip()
+	# 	header.append(x[:-3])
+
+	#data-----
+	data = []
+	for x in range(2,len(rows)):
+		row = [x-1]
+		
+		rr = rows[x].select('th a,th i a')
+		for ir in rr:
+			z = str(ir.string)
+			if z[0] != '[' and z != 'None':
+				row.append(z)
+			
+		rrdata = rows[x].select('td')
+		for i in range(0,len(rrdata)-1):
+			ii = rrdata[i].text.strip()
+			if ii == 'No data':
+				ii = 'NA'
+			else:
+				ii = ii.replace(',', '')#removing comma from number input
+			row.append(ii)
+		data.append(row)
+
+	for x in data:
+		if len(x) == 4:
+			del data[data.index(x)]
+	finalheader = np.vstack((header,data[0]))
+	for x in data:
+		if data.index(x) == 0:
+			del data[data.index(x)]
+	data = np.array(data)
+	print(finalheader.shape)
+	print(data.shape)
+	# print(finaldata)
+	data = data[:223]
+	# print(data)
+
+	with open('data/wikitable.csv', 'w+', newline='') as myfile:
+		wr = csv.writer(myfile)
+		wr.writerows(finalheader)
+	with open('data/wikitable.csv', 'a+', newline='') as myfile:
+		wr = csv.writer(myfile)
+		wr.writerows(data)
+
+	path = 'data/wikitable.csv'	
+	print ('Table loaded')
+	rivia.type = 'table'	
+	rivia.process_file(path,rivia.type)
+
+@app.route('/wikiqa')
+def wikiqa():
+	return render_template('wikiqa.html')
 
 @app.route('/audio')
 def audio():
@@ -200,6 +264,6 @@ def open_browser():
 	path = '/usr/bin/google-chrome %s --incognito'
 	webbrowser.get(path).open_new('http://127.0.0.1:5000')
 
-# if __name__ == '__main__':
-# 	Timer(1, open_browser).start();
-# 	app.run(debug=True) 
+if __name__ == '__main__':
+	Timer(1, open_browser).start()
+	app.run(debug=True) 

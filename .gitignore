@@ -3,3 +3,4 @@
 __pycache__
 rivia-env/
 static/audio
+.vscode
