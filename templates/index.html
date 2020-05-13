@@ -11,6 +11,8 @@
     <link href="static/style.css" rel="stylesheet">
     <link href="static/chat.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Inknut Antiqua' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -19,13 +21,31 @@
     <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
 </head>
 
-<body>
-<h1 class="text-center app-header">Rivia</h2>
-<br>
+<body class="bodyindex">
+    <script>
+        window.onload = function() {
+            var particles = Particles.init({
+            selector: '.background',
+            maxParticles: 100,
+            color: ['#DA0463', '#404B69', '#DBEDF3','#4286f4','#ffffff'],
+            connectParticles: true,
+            responsive: [{
+                breakpoint: 800,
+                options: {
+                    color: '#00C9B1',
+                    maxParticles: 80,
+                connectParticles: false
+                }
+            }]
+        });
+    };
 
+    </script>
+<h1 class="text-center app-header" style="font-family:Inknut Antiqua;font-size: 55px;font-weight: 500;color:white;">Rivia</h2>
 <div style="overflow: auto;">
+
     <div class="split left">
-        <h3 align="center" style="position: relative;">Data</h3>
+        <h3 align="center" class='section-title' style="position: relative;">Data</h3>
         <div id="drop-area">
             <form method="post" enctype="multipart/form-data" >
                 <label for="fileUpload" class="custom-file-upload">
@@ -41,7 +61,7 @@
 
 
     <div class="split right" id ='splitright'>
-        <h3 align="center" style="position: relative;">Chat</h3>
+        <h3 align="center" class='section-title' style="position: relative;">Chat</h3>
         <div class='chatwin'>
             <div id="chatbot" >
             </div>
@@ -65,6 +85,7 @@
 </div>
 <br><br>
 <div id="chat3"></div><br><br>
-    
+<canvas class="background"></canvas>
+<script src="../static/particles.js/dist/particles.js"></script>
 </body>
 </html>
