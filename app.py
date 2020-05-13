@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, jsonify, after_this_request, make_response
+from flask import Flask, render_template, url_for, request, jsonify, after_this_request, make_response, session
 from werkzeug.utils import secure_filename
 import pandas as pd
 import os
@@ -21,53 +21,18 @@ app.config['UPLOAD_FOLDER'] = 'data/'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'csv','tsv'}
 app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
 RECORDED_FILES_PATH = 'static/audio/'
+app.secret_key = 'kzquekZZui'
 
 current_file = 'data/output.tsv'
 # app = Flask(__name__, static_folder='static')
 
-rivia = None
-typefile = str()
-
-# @app.before_first_request
-def load_func():
-	global rivia
-	rivia = Rivia()
-	rivia.what()
-	# rivia = Rivia('table')
-	# rivia.what()
-	# print ('Loaded')
 
 def allowed_file(filename):
 	return '.' in filename and \
  		filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def answer(query):
-	#Loading the model
-	# archive = load_archive("model/wikitables-model-2020.02.10.tar.gz")
-	# predictor = Predictor.from_archive(archive, 'wikitables-parser')
 
-	#Reading the Data
-	# with open('data/final_output.txt','r') as f:
-	# 	table = f.read()
-		
-
-	# question = query
-	# data = {
-	#   "table": table,
-	#   "question": question
-	# }
-
-	# result = predictor.predict_json(data)
-	# print(result["answer"])
-	# print(result["logical_form"][0])
-
-	# reply = {"answer":result['answer']}
-	# # print (type(jsonify(reply)))
-	# print (str(reply))
-	# print (type(result['answer']))
-	return str(reply)
-
-def compute_results(question):
+def compute_results(question, rivia):
 	result,typefile = rivia.rivia_predict(question)
 	print(typefile)
 	if typefile == 'table':
@@ -112,18 +77,19 @@ def upload():
 	if request.method == 'POST':
 		f = request.files['table']
 		if f and allowed_file(f.filename):
+			rivia = Rivia()
 			path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename))
 			f.save(path)
 			extention = f.filename.rsplit('.', 1)[1].lower()
 			if extention in ['csv', 'tsv', 'db']:
 				print ('Table loaded')
-				typefile = 'table'
+				rivia.type = 'table'
 			elif extention in ['txt']:
 				print ('Passage loaded')
-				typefile = 'passage'		
-			rivia.process_file(path,typefile)
+				rivia.type = 'passage'		
+			rivia.process_file(path,rivia.type)
 			
-			if typefile == 'table':
+			if rivia.type == 'table':
 				df = pd.read_csv(path)
 				print (df.shape)
 				ans = df.to_html(bold_rows=True,classes="table table-hover thead-light table-striped")
@@ -132,6 +98,7 @@ def upload():
 				ans = "<h4 style=\"margin-left:50px;margin-right:50px\">"+f+"</h4>"
 
 			resp = {"ans":ans}
+			session["type"] = rivia.type
 		else:
 			resp = {"ans":"Out of format"}
 		return jsonify(resp)
@@ -140,6 +107,11 @@ def upload():
 
 @app.route('/getanswer', methods=['GET', 'POST'])
 def getanswer():
+	rivia = None
+	if "type" in session.keys():
+		rivia = Rivia(session["type"])
+
+	print (rivia)	
 	print ('Got another request')
 	req = request.get_json()
 	print(req)
@@ -147,7 +119,7 @@ def getanswer():
 	
 	
 	# reply = {"answer":ans}
-	ans = compute_results(req['query'])
+	ans = compute_results(req['query'], rivia)
 	res = make_response(jsonify(ans), 200)
 	# print (answer())
 	return res
@@ -212,8 +184,8 @@ def uploadwiki():
 
 	path = 'data/wikitable.csv'	
 	print ('Table loaded')
-	typefile = 'table'	
-	rivia.process_file(path,typefile)
+	rivia.type = 'table'	
+	rivia.process_file(path,rivia.type)
 
 @app.route('/wikiqa')
 def wikiqa():
@@ -231,7 +203,14 @@ def speech():
 	if request.method == 'POST':
 
 		print ("In post")
-
+		# try:
+		# 	os.system('rm -rf static/audio/')
+		# 	os.system('mkdir static/audio')
+		# except Exception as e:
+		# 	print (e)
+		rivia = None
+		if "type" in session.keys():
+			rivia = Rivia(session["type"])
 		f = request.files['audio_data']
 		print (f)
 		path = os.path.join(RECORDED_FILES_PATH, secure_filename(f.filename))
@@ -259,7 +238,7 @@ def speech():
 			print("You said: " + recog)
 			query = recog
 
-			answer = compute_results(query)
+			answer = compute_results(query, rivia)
 			print ("Answer",answer)
 			print (type(answer))
 			# i = 0
@@ -293,6 +272,5 @@ def open_browser():
 	webbrowser.get(path).open_new('http://127.0.0.1:5000')
 
 if __name__ == '__main__':
-	load_func()
 	Timer(1, open_browser).start();
 	app.run(debug=True) 

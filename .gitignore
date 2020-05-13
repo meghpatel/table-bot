@@ -3,3 +3,5 @@
 __pycache__
 rivia-env/
 static/audio
+data/final_output.txt
+data/output.txt
