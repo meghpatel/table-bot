@@ -168,13 +168,6 @@ def uploadwiki():
 	# 	x = header1[i].text.strip()
 	# 	header.append(x[:-3])
 
-	#totalsum
-	total1 = rows[1].select('th')
-	total = ['Total']
-	for i in range(0,len(total1)-1):
-		x = total1[i].text.strip()
-		total.append(x)
-
 	#data-----
 	data = []
 	for x in range(2,len(rows)):
@@ -191,6 +184,8 @@ def uploadwiki():
 			ii = rrdata[i].text.strip()
 			if ii == 'No data':
 				ii = 'NA'
+			else:
+				ii = ii.replace(',', '')#removing comma from number input
 			row.append(ii)
 		data.append(row)
 
