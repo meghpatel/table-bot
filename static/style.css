@@ -2,12 +2,18 @@ body {
     padding-top: 10px;
     font-family: 'Lobster', serif;
 }
-
+.background {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
 #chatbot {
     color: rgba(255, 255, 255, 1);
     position: relative;
     max-height: 45vh;
-    margin-right: 35px;
+    margin-right: 37px;
     overflow-y: auto;
     scroll-behavior: smooth;
 }
@@ -45,14 +51,25 @@ body {
     height: 1px;
 } */
 
+.bodyindex{
+    background: #373B44;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4286f4, #373B44);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+    
 .split {
-    height: 100%;
-    width: 50%;
+    width: 42%;
     position: fixed;
     z-index: 1;
     top: 1;
     padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
     overflow-y: auto;
+    margin: 50px;
+    border-radius: 15px;
+    background-color:rgba(255, 255, 255, 0.85);
 }
   
 /* Control the left side */
@@ -65,8 +82,11 @@ body {
 .right {
     align-items: center;
     right: 0;
+    height: 75%;
 }
-
+.section-title{
+    font-size: 30px;
+}
 .centered {
     position: relative;
     overflow: auto;

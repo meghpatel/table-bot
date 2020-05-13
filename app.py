@@ -176,7 +176,7 @@ def uploadwiki():
 	print(finalheader.shape)
 	print(data.shape)
 	# print(finaldata)
-	data = data[:223]
+	data = data[:222]
 	# print(data)
 
 	with open('data/wikitable.csv', 'w+', newline='') as myfile:
