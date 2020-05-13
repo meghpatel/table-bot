@@ -27,7 +27,7 @@ class Rivia:
 		# temp_answer = result['answer']
 		# print (type(temp_answer))
 		if type(temp_answer) is list:
-			df = pd.read_table('data/final_output.txt','\t')
+			df = pd.read_table('data/final_output.txt','\t',encoding='ISO-8859-1')
 			types = dict(df.dtypes)
 
 			checks = []

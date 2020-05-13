@@ -6,14 +6,15 @@ body {
     margin: 0;
     font-family: Arial;
     font-size: 17px;
+    background-image: url('../static/circuit.jpg');
 }
-#myVideo {
+/* #myVideo {
     position: fixed;
     right: 0;
     bottom: 0;
     min-width: 100%;
     min-height: 100%;
-}
+} */
   /* Add some content at the bottom of the video/page */
 .content {
     position: relative;
@@ -28,8 +29,8 @@ body {
 
 /* Style the button used to pause/play the video */
 .btn-homepage {
-    width: 180px;
-    font-size: 20px;
+    width: 200px;
+    font-size: 28px;
     padding: 10px;
     font-style: bold;
     border: none;
@@ -37,10 +38,10 @@ body {
     color: white;
     /* color: rgb(235, 200, 5); */
     cursor: pointer;
+    font-weight: 400;
 }
 
 .btn-homepage:hover {
-    background: rgb(235, 200, 5);
+    background: rgba(32, 32, 32, 0.534);
     color: #fff;
-
 }

@@ -163,10 +163,10 @@ def uploadwiki():
 
 	#header-----
 	header1 = rows[0].select('th')
-	header = ['#']
-	for i in range(0,len(header1)-1):
-		x = header1[i].text.strip()
-		header.append(x[:-3])
+	header = ['#','Country','Cases','Deaths','Recovery']
+	# for i in range(0,len(header1)-1):
+	# 	x = header1[i].text.strip()
+	# 	header.append(x[:-3])
 
 	#totalsum
 	total1 = rows[1].select('th')
@@ -180,10 +180,10 @@ def uploadwiki():
 	for x in range(2,len(rows)):
 		row = [x-1]
 		
-		rr = rows[x].select('th a')
+		rr = rows[x].select('th a,th i a')
 		for ir in rr:
 			z = str(ir.string)
-			if z[0] != '[':
+			if z[0] != '[' and z != 'None':
 				row.append(z)
 			
 		rrdata = rows[x].select('td')
@@ -194,31 +194,31 @@ def uploadwiki():
 			row.append(ii)
 		data.append(row)
 
-	data = data[:227]
-	finaldata = np.vstack((header,total))
-	data = np.array((data))
-	print(finaldata)
-	print(finaldata.shape)
-	finaldata = np.concatenate((finaldata,data),0)
+	for x in data:
+		if len(x) == 4:
+			del data[data.index(x)]
+	finalheader = np.vstack((header,data[0]))
+	for x in data:
+		if data.index(x) == 0:
+			del data[data.index(x)]
+	data = np.array(data)
+	print(finalheader.shape)
+	print(data.shape)
+	# print(finaldata)
+	data = data[:223]
+	# print(data)
 
-	with open('data/wikitable.csv', 'w', newline='') as myfile:
-		wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
-		wr.writerows(finaldata)
+	with open('data/wikitable.csv', 'w+', newline='') as myfile:
+		wr = csv.writer(myfile)
+		wr.writerows(finalheader)
+	with open('data/wikitable.csv', 'a+', newline='') as myfile:
+		wr = csv.writer(myfile)
+		wr.writerows(data)
 
 	path = 'data/wikitable.csv'	
 	print ('Table loaded')
 	typefile = 'table'	
 	rivia.process_file(path,typefile)
-	
-	if typefile == 'table':
-		df = pd.read_csv(path)
-		print (df.shape)
-		ans = df.to_html(bold_rows=True,classes="table table-hover thead-light table-striped")
-	else:
-		f = open(path,'r+').read()
-		ans = "<h4 style=\"margin-left:50px;margin-right:50px\">"+f+"</h4>"
-
-	resp = {"ans":ans}
 
 @app.route('/wikiqa')
 def wikiqa():

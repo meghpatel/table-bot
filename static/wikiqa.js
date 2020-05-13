@@ -5,7 +5,7 @@ console.log(url);
 
 fetch(url)
 .then(data => {
-    console.log(data)
+    // console.log(data)
 
     const inp = document.getElementById("inputbox");
     const rec_btn = document.getElementById("recordButton");
