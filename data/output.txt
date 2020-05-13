@@ -1,9 +1,127 @@
-Coronavirus disease (COVID-19) is an infectious disease caused by a newly discovered coronavirus.
-
-Most people infected with the COVID-19 virus will experience mild to moderate respiratory illness and recover without requiring special treatment.  Older people, and those with underlying medical problems like cardiovascular disease, diabetes, chronic respiratory disease, and cancer are more likely to develop serious illness.
-
-The best way to prevent and slow down transmission is be well informed about the COVID-19 virus, the disease it causes and how it spreads. Protect yourself and others from infection by washing your hands or using an alcohol based rub frequently and not touching your face. 
-
-The COVID-19 virus spreads primarily through droplets of saliva or discharge from the nose when an infected person coughs or sneezes, so it\’s important that you also practice respiratory etiquette (for example, by coughing into a flexed elbow).
-
-At this time, there are no specific vaccines or treatments for COVID-19. However, there are many ongoing clinical trials evaluating potential treatments. WHO will continue to provide updated information as soon as clinical findings become available.
+#	Country	Cases	Deaths	Recover
+1	United States	855250	47974	78353
+2	Spain	213024	22157	89250
+3	Italy	187327	25085	54543
+4	Germany	150729	5315	91612
+5	United Kingdom	133495	18100	—
+6	France	119151	21340	40657
+7	Turkey	98674	2376	16477
+8	Iran	87026	5481	64843
+9	China	82798	4632	77207
+10	Russia	62773	555	4891
+11	Brazil	46195	2924	25318
+12	Belgium	42797	6490	9800
+13	Canada	40190	1974	13986
+14	Netherlands	34842	4054	—
+15	Switzerland	28207	1526	19900
+16	Portugal	21982	785	1143
+17	India	21700	686	4325
+18	Peru	19250	530	7027
+19	Ireland	16671	769	9233
+20	Sweden	16004	1937	550
+21	Austria	14932	522	11694
+22	Israel	14592	191	5334
+23	Saudi Arabia	12772	114	1812
+24	Japan	12023	299	1424
+25	Chile	11296	160	5386
+26	Singapore	11178	12	896
+27	Ecuador	10850	537	1262
+28	South Korea	10702	240	8411
+29	Mexico	10544	970	5956
+30	Pakistan	10513	224	2337
+31	Poland	10346	435	1513
+32	Romania	10096	527	2478
+33	United Arab Emirates	8756	56	1637
+34	Denmark	8073	394	5384
+35	Belarus	8022	60	938
+36	Indonesia	7775	647	960
+37	Qatar	7764	10	750
+38	Norway	7338	187	—
+39	Ukraine	7170	187	504
+40	Czech Republic	7136	210	2002
+41	Serbia	7114	134	1025
+42	Philippines	6981	462	722
+43	Australia	6661	75	5045
+44	Malaysia	5603	95	3542
+45	Dominican Republic	5300	260	581
+46	Panama	4992	144	255
+47	Colombia	4356	206	870
+48	Finland	4284	172	2000
+49	Bangladesh	4186	127	108
+50	Egypt	3659	276	935
+51	Luxembourg	3654	80	711
+52	South Africa	3635	65	1055
+53	Morocco	3537	151	430
+54	Argentina	3133	151	836
+55	Algeria	2910	402	1204
+56	Thailand	2839	50	2430
+57	Moldova	2778	76	560
+58	Greece	2408	121	577
+59	Kuwait	2399	14	498
+60	Hungary	2284	239	390
+61	Kazakhstan	2207	20	515
+62	Bahrain	2098	8	1082
+63	Croatia	1950	48	869
+64	Iceland	1785	10	1462
+65	Oman	1716	8	307
+66	Uzbekistan	1716	7	450
+67	Iraq	1631	83	1096
+68	Estonia	1592	45	184
+69	Armenia	1523	24	659
+70	Azerbaijan	1518	20	907
+71	Bosnia & Herzegovina	1413	54	485
+72	Lithuania	1398	38	399
+73	Puerto Rico	1378	67	—
+74	Slovenia	1366	79	197
+75	Slovakia	1325	15	288
+76	North Macedonia	1300	56	301
+77	Cuba	1189	40	341
+78	Afghanistan	1176	40	166
+79	Cameroon	1163	43	329
+80	Ghana	1154	9	99
+81	New Zealand	1112	16	1065
+82	Bulgaria	1081	50	190
+83	Hong Kong	1034	4	678
+84	Djibouti	974	2	183
+85	Ivory Coast	952	14	310
+86	Tunisia	909	38	190
+87	Nigeria	873	28	197
+88	Cyprus	790	13	98
+89	Latvia	778	11	133
+90	Guinea	761	6	1164
+91	Andorra	723	37	309
+92	Lebanon	688	22	140
+93	Costa Rica	681	6	180
+94	Bolivia	672	40	344
+95	Albania	663	27	385
+96	Niger	662	22	193
+97	Kyrgyzstan	631	8	302
+98	Kosovo	630	18	138
+99	Burkina Faso	609	39	389
+100	Uruguay	549	12	337
+101	Honduras	519	47	31
+102	San Marino	488	40	62
+103	Senegal	479	6	257
+104	Malta	445	3	204
+105	Jordan	435	7	315
+106	Taiwan	427	6	236
+107	Georgia	420	5	111
+108	DR Congo	377	25	51
+109	Guatemala	342	10	25
+110	Sri Lanka	335	7	107
+111	Palestine	334	2	71
+112	Mauritius	329	9	261
+113	Montenegro	316	5	116
+114	Isle of Man	307	15	212
+115	Kenya	303	14	83
+116	Venezuela	298	10	122
+117	Mali	293	17	73
+118	Somalia	286	16	10
+119	Tanzania	284	10	11
+120	Vietnam	268	0	224
+121	Jersey	255	18	151
+122	El Salvador	250	8	67
+123	Guernsey	243	10	134
+124	Jamaica	243	6	27
+125	Paraguay	213	9	62
+126	Faroe Islands	187	0	178

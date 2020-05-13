@@ -15,7 +15,7 @@ import csv
 class Rivia:
 
 	def __init__(self, type=None):
-		self.type = None
+		self.type = type
 
 	def what(self):
 		print ("Rivia is a AI based Chatbot")

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, jsonify, after_this_request, make_response
+from flask import Flask, render_template, url_for, request, jsonify, after_this_request, make_response, session
 from werkzeug.utils import secure_filename
 import pandas as pd
 import os
@@ -21,19 +21,18 @@ app.config['UPLOAD_FOLDER'] = 'data/'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'csv','tsv'}
 app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
 RECORDED_FILES_PATH = 'static/audio/'
+app.secret_key = 'kzquekZZui'
 
 current_file = 'data/output.tsv'
 # app = Flask(__name__, static_folder='static')
 
-rivia = Rivia()
-typefile = str()
 
 def allowed_file(filename):
 	return '.' in filename and \
  		filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-def compute_results(question):
+def compute_results(question, rivia):
 	result,typefile = rivia.rivia_predict(question)
 	print(typefile)
 	if typefile == 'table':
@@ -78,6 +77,7 @@ def upload():
 	if request.method == 'POST':
 		f = request.files['table']
 		if f and allowed_file(f.filename):
+			rivia = Rivia()
 			path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename))
 			f.save(path)
 			extention = f.filename.rsplit('.', 1)[1].lower()
@@ -98,6 +98,7 @@ def upload():
 				ans = "<h4 style=\"margin-left:50px;margin-right:50px\">"+f+"</h4>"
 
 			resp = {"ans":ans}
+			session["type"] = rivia.type
 		else:
 			resp = {"ans":"Out of format"}
 		return jsonify(resp)
@@ -106,6 +107,11 @@ def upload():
 
 @app.route('/getanswer', methods=['GET', 'POST'])
 def getanswer():
+	rivia = None
+	if "type" in session.keys():
+		rivia = Rivia(session["type"])
+
+	print (rivia)	
 	print ('Got another request')
 	req = request.get_json()
 	print(req)
@@ -113,7 +119,7 @@ def getanswer():
 	
 	
 	# reply = {"answer":ans}
-	ans = compute_results(req['query'])
+	ans = compute_results(req['query'], rivia)
 	res = make_response(jsonify(ans), 200)
 	# print (answer())
 	return res
@@ -197,11 +203,14 @@ def speech():
 	if request.method == 'POST':
 
 		print ("In post")
-		try:
-			os.system('rm -rf static/audio/')
-			os.system('mkdir static/audio')
-		except Exception as e:
-			print (e)
+		# try:
+		# 	os.system('rm -rf static/audio/')
+		# 	os.system('mkdir static/audio')
+		# except Exception as e:
+		# 	print (e)
+		rivia = None
+		if "type" in session.keys():
+			rivia = Rivia(session["type"])
 		f = request.files['audio_data']
 		print (f)
 		path = os.path.join(RECORDED_FILES_PATH, secure_filename(f.filename))
@@ -229,7 +238,7 @@ def speech():
 			print("You said: " + recog)
 			query = recog
 
-			answer = compute_results(query)
+			answer = compute_results(query, rivia)
 			print ("Answer",answer)
 			print (type(answer))
 			# i = 0
