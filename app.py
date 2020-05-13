@@ -28,39 +28,10 @@ def load_func():
 	global rivia
 	rivia = Rivia()
 	rivia.what()
-	# rivia = Rivia('table')
-	# rivia.what()
-	# print ('Loaded')
 
 def allowed_file(filename):
 	return '.' in filename and \
  		filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-def answer(query):
-	#Loading the model
-	# archive = load_archive("model/wikitables-model-2020.02.10.tar.gz")
-	# predictor = Predictor.from_archive(archive, 'wikitables-parser')
-
-	#Reading the Data
-	# with open('data/final_output.txt','r') as f:
-	# 	table = f.read()
-		
-
-	# question = query
-	# data = {
-	#   "table": table,
-	#   "question": question
-	# }
-
-	# result = predictor.predict_json(data)
-	# print(result["answer"])
-	# print(result["logical_form"][0])
-
-	# reply = {"answer":result['answer']}
-	# # print (type(jsonify(reply)))
-	# print (str(reply))
-	# print (type(result['answer']))
-	return str(reply)
 
 def compute_results(question):
 	result,typefile = rivia.rivia_predict(question)
@@ -83,6 +54,7 @@ def compute_results(question):
 
 @app.route('/') 
 def home():
+	load_func()
 	return render_template("index.html")
 
 @app.route('/favicon.ico')
