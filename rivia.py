@@ -124,3 +124,8 @@ class Rivia:
 			fd.write(d)
 		fd.close()
 
+	def __repr__(self):
+		return {"type":self.type} 
+
+	def __str__(self):
+		return f'The File type is {self.type}'

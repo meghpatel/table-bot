@@ -57,9 +57,9 @@ def home():
 	load_func()
 	return render_template("index.html")
 
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static', 'images'), 'favicon.ico', mimetype='image/png')
+# @app.route('/favicon.ico')
+# def favicon():
+#     return send_from_directory(os.path.join(app.root_path, 'static', 'images'), 'favicon.ico', mimetype='image/png')
 # @app.route('/getdata', methods=['GET', 'POST'])
 # def getdata():
 # 	@after_this_request
@@ -85,13 +85,17 @@ def upload():
 			extention = f.filename.rsplit('.', 1)[1].lower()
 			if extention in ['csv', 'tsv', 'db']:
 				print ('Table loaded')
-				typefile = 'table'
+				rivia.type = 'table'
 			elif extention in ['txt']:
 				print ('Passage loaded')
-				typefile = 'passage'		
-			rivia.process_file(path,typefile)
+				rivia.type = 'passage'		
+			print (rivia.type)
+			print (type(rivia.type))
+			print (rivia.type == 'table')
+			rivia.process_file(path,rivia.type)
 			
-			if typefile == 'table':
+			if rivia.type == 'table':
+				print ("Inside IFFF")
 				df = pd.read_csv(path)
 				print (df.shape)
 				ans = df.to_html(bold_rows=True,classes="table table-hover thead-light table-striped")
