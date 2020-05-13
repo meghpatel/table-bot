@@ -25,47 +25,13 @@ RECORDED_FILES_PATH = 'static/audio/'
 current_file = 'data/output.tsv'
 # app = Flask(__name__, static_folder='static')
 
-rivia = None
+rivia = Rivia()
 typefile = str()
-
-# @app.before_first_request
-def load_func():
-	global rivia
-	rivia = Rivia()
-	rivia.what()
-	# rivia = Rivia('table')
-	# rivia.what()
-	# print ('Loaded')
 
 def allowed_file(filename):
 	return '.' in filename and \
  		filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def answer(query):
-	#Loading the model
-	# archive = load_archive("model/wikitables-model-2020.02.10.tar.gz")
-	# predictor = Predictor.from_archive(archive, 'wikitables-parser')
-
-	#Reading the Data
-	# with open('data/final_output.txt','r') as f:
-	# 	table = f.read()
-		
-
-	# question = query
-	# data = {
-	#   "table": table,
-	#   "question": question
-	# }
-
-	# result = predictor.predict_json(data)
-	# print(result["answer"])
-	# print(result["logical_form"][0])
-
-	# reply = {"answer":result['answer']}
-	# # print (type(jsonify(reply)))
-	# print (str(reply))
-	# print (type(result['answer']))
-	return str(reply)
 
 def compute_results(question):
 	result,typefile = rivia.rivia_predict(question)
@@ -117,13 +83,13 @@ def upload():
 			extention = f.filename.rsplit('.', 1)[1].lower()
 			if extention in ['csv', 'tsv', 'db']:
 				print ('Table loaded')
-				typefile = 'table'
+				rivia.type = 'table'
 			elif extention in ['txt']:
 				print ('Passage loaded')
-				typefile = 'passage'		
-			rivia.process_file(path,typefile)
+				rivia.type = 'passage'		
+			rivia.process_file(path,rivia.type)
 			
-			if typefile == 'table':
+			if rivia.type == 'table':
 				df = pd.read_csv(path)
 				print (df.shape)
 				ans = df.to_html(bold_rows=True,classes="table table-hover thead-light table-striped")
@@ -212,8 +178,8 @@ def uploadwiki():
 
 	path = 'data/wikitable.csv'	
 	print ('Table loaded')
-	typefile = 'table'	
-	rivia.process_file(path,typefile)
+	rivia.type = 'table'	
+	rivia.process_file(path,rivia.type)
 
 @app.route('/wikiqa')
 def wikiqa():
@@ -293,6 +259,5 @@ def open_browser():
 	webbrowser.get(path).open_new('http://127.0.0.1:5000')
 
 if __name__ == '__main__':
-	load_func()
 	Timer(1, open_browser).start();
 	app.run(debug=True) 

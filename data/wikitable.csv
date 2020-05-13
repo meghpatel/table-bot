@@ -1,11 +1,11 @@
 #,Country,Cases,Deaths,Recovery
 1,United States,1400741,83082,237256
 2,Russia,242271,2212,48003
-3,Spain,228030,26920,138930
+3,Spain,228691,27104,140823
 4,United Kingdom,226463,32692,NA
 5,Italy,221216,30911,109039
-6,Brazil,178214,12461,72597
-7,Germany,173273,7754,144451
+6,Brazil,178883,12484,72597
+7,Germany,173274,7755,144451
 8,Turkey,141475,3894,98889
 9,France,140227,26991,57785
 10,Iran,110767,6733,88357
@@ -13,7 +13,7 @@
 12,India,74281,2415,24386
 13,Peru,72059,2057,23324
 14,Canada,71157,5169,34042
-15,Belgium,53779,8761,13732
+15,Belgium,53981,8843,13937
 16,Netherlands,42984,5510,NA
 17,Saudi Arabia,42925,264,15257
 18,Mexico,38324,3926,17781
@@ -28,16 +28,16 @@
 27,Belarus,24873,142,6974
 28,Ireland,23242,1488,17110
 29,United Arab Emirates,19661,203,6012
-30,Poland,16921,839,6131
-31,Bangladesh,16660,250,2902
-32,Israel,16526,258,11956
+30,Bangladesh,17827,269,3361
+31,Poland,16921,839,6131
+32,Israel,16539,262,12173
 33,Ukraine,16425,439,3716
 34,Japan,16049,678,8920
 35,Austria,15910,623,14148
-36,Romania,15778,991,7685
+36,Romania,16002,1016,7961
 37,Indonesia,15438,1028,3287
 38,Colombia,12272,493,2971
-39,Philippines,11350,751,2106
+39,Philippines,11618,772,2251
 40,South Africa,11350,206,4357
 41,South Korea,10962,259,9695
 42,Dominican Republic,10900,402,3221
@@ -75,7 +75,7 @@
 74,Guinea,2298,11,816
 75,Croatia,2207,91,1808
 76,Bosnia & Herzegovina,2158,117,1168
-77,Bulgaria,2023,95,476
+77,Bulgaria,2069,96,499
 78,Honduras,2006,116,206
 79,Senegal,1995,19,742
 80,Ivory Coast,1857,21,820
@@ -85,19 +85,19 @@
 84,North Macedonia,1674,92,1205
 85,Sudan,1661,80,173
 86,Lithuania,1505,54,908
-87,Slovakia,1465,27,983
+87,Slovakia,1469,27,1060
 88,Slovenia,1461,102,259
 89,Djibouti,1256,3,886
-90,Somalia,1170,52,126
-91,New Zealand,1147,21,1412
-92,Guatemala,1114,26,111
+90,Guatemala,1199,27,120
+91,Somalia,1170,52,126
+92,New Zealand,1147,21,1412
 93,DR Congo,1102,44,146
 95,Charles de Gaulle,1081,0,0
 96,Hong Kong,1048,4,991
 97,Kyrgyzstan,1044,12,726
-98,Tunisia,1032,45,740
-99,El Salvador,998,18,349
-100,Latvia,946,18,464
+98,El Salvador,1037,20,374
+99,Tunisia,1032,45,740
+100,Latvia,951,19,464
 101,Kosovo,919,29,671
 102,Maldives,904,3,29
 103,Cyprus,903,16,449
@@ -120,8 +120,8 @@
 120,San Marino,638,41,161
 121,Jordan,576,9,390
 122,Tanzania,509,21,183
-123,Malta,506,5,434
-124,Jamaica,505,9,90
+123,Jamaica,507,9,100
+124,Malta,506,5,434
 125,Zambia,441,7,117
 126,Taiwan,440,7,372
 127,Equatorial Guinea,439,4,13
@@ -141,10 +141,10 @@
 141,Cape Verde,267,2,58
 142,Ethiopia,261,5,106
 143,Guernsey,252,13,229
-144,São Tomé & Príncipe,220,6,4
-145,Nepal,217,0,33
-146,Liberia,212,20,86
-147,Haiti,209,16,17
+144,SÃ£o TomÃ© & PrÃ­ncipe,220,6,4
+145,Haiti,219,18,17
+146,Nepal,217,0,33
+147,Liberia,212,20,86
 148,Donetsk PR,208,5,27
 149,Togo,199,11,92
 150,South Sudan,194,0,2
@@ -176,7 +176,7 @@
 176,Yemen,65,10,1
 177,Libya,64,3,28
 178,French Polynesia,60,0,58
-179,Malawi,58,3,24
+179,Malawi,63,3,24
 180,Somaliland,48,0,15
 181,Syria,47,3,29
 182,Angola,45,2,14
@@ -198,7 +198,7 @@
 198,New Caledonia,18,0,18
 199,Saint Lucia,18,0,17
 200,Saint Vincent,17,0,9
-201,Curaçao,16,1,14
+201,CuraÃ§ao,16,1,14
 202,Dominica,16,0,15
 203,Namibia,16,0,11
 204,Burundi,15,1,7
