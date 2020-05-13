@@ -203,7 +203,11 @@ def speech():
 	if request.method == 'POST':
 
 		print ("In post")
-
+		try:
+			os.system('rm -rf static/audio/')
+			os.system('mkdir static/audio')
+		except Exception as e:
+			print (e)
 		f = request.files['audio_data']
 		print (f)
 		path = os.path.join(RECORDED_FILES_PATH, secure_filename(f.filename))
@@ -264,6 +268,6 @@ def open_browser():
 	path = '/usr/bin/google-chrome %s --incognito'
 	webbrowser.get(path).open_new('http://127.0.0.1:5000')
 
-if __name__ == '__main__':
-	Timer(1, open_browser).start()
-	app.run(debug=True) 
+# if __name__ == '__main__':
+# 	Timer(1, open_browser).start()
+# 	app.run(debug=True) 
