@@ -1,5 +1,5 @@
 #,Country,Cases,Deaths,Recovery
-1,United States,1410266,83807,239757
+1,United States,1411488,83953,240066
 2,Russia,242271,2212,48003
 3,United Kingdom,229705,33186,NA
 4,Spain,228691,27104,140823
@@ -71,29 +71,29 @@
 70,Greece,2760,156,1374
 71,Azerbaijan,2758,35,1789
 72,Uzbekistan,2568,10,2046
-73,Puerto Rico,2329,114,746
-74,Guinea,2298,11,816
+73,Guinea,2374,14,856
+74,Puerto Rico,2329,114,746
 75,Croatia,2213,94,1834
 76,Bosnia & Herzegovina,2181,120,1228
 77,Senegal,2105,21,782
-78,Bulgaria,2069,96,499
-79,Honduras,2006,116,206
+78,Honduras,2080,121,211
+79,Bulgaria,2069,96,499
 80,Ivory Coast,1857,21,820
-81,Cuba,1804,78,1277
-82,Iceland,1801,10,1776
-83,Estonia,1746,61,777
+81,Cuba,1810,79,1326
+82,Iceland,1802,10,1780
+83,Estonia,1751,61,777
 84,North Macedonia,1694,95,1229
 85,Sudan,1661,80,173
 86,Lithuania,1505,54,908
 87,Slovakia,1469,27,1060
 88,Slovenia,1463,103,260
-89,Djibouti,1256,3,886
-90,Guatemala,1199,27,120
-91,Somalia,1170,52,126
-92,New Zealand,1147,21,1412
-93,DR Congo,1102,44,146
+89,Djibouti,1286,3,900
+90,Somalia,1219,52,130
+91,Guatemala,1199,27,120
+92,DR Congo,1169,50,148
+93,New Zealand,1147,21,1412
 95,Charles de Gaulle,1081,0,0
-96,Hong Kong,1048,4,991
+96,Hong Kong,1051,4,1008
 97,Kyrgyzstan,1044,12,726
 98,El Salvador,1037,20,374
 99,Tunisia,1032,45,740
@@ -101,12 +101,12 @@
 101,Kosovo,919,29,671
 102,Maldives,904,3,29
 103,Cyprus,903,16,449
-104,Sri Lanka,891,9,382
+104,Sri Lanka,893,9,382
 105,Albania,880,31,688
 106,Lebanon,878,26,236
 107,Gabon,863,9,137
 108,Niger,854,47,648
-109,Guinea-Bissau,820,3,26
+109,Guinea-Bissau,836,3,26
 110,Costa Rica,804,7,520
 111,Burkina Faso,766,51,588
 112,Andorra,758,48,568
@@ -141,7 +141,7 @@
 141,Cape Verde,267,2,58
 142,Ethiopia,263,5,108
 143,Guernsey,252,13,229
-144,Sï¿½o Tomï¿½ & Prï¿½ncipe,220,6,4
+144,São Tomé & Príncipe,220,6,4
 145,Haiti,219,18,17
 146,Nepal,219,0,33
 147,Liberia,212,20,86
@@ -198,7 +198,7 @@
 198,New Caledonia,18,0,18
 199,Saint Lucia,18,0,17
 200,Saint Vincent,17,0,9
-201,Curaï¿½ao,16,1,14
+201,Curaçao,16,1,14
 202,Dominica,16,0,15
 203,Namibia,16,0,11
 204,Burundi,15,1,7
