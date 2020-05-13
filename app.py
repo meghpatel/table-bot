@@ -197,7 +197,11 @@ def speech():
 	if request.method == 'POST':
 
 		print ("In post")
-
+		try:
+			os.system('rm -rf static/audio/')
+			os.system('mkdir static/audio')
+		except Exception as e:
+			print (e)
 		f = request.files['audio_data']
 		print (f)
 		path = os.path.join(RECORDED_FILES_PATH, secure_filename(f.filename))
