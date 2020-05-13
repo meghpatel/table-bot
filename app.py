@@ -20,14 +20,14 @@ RECORDED_FILES_PATH = 'static/audio/'
 
 current_file = 'data/output.tsv'
 
-rivia = None
+rivia = Rivia()
 typefile = str()
 
 # @app.before_first_request
-def load_func():
-	global rivia
-	rivia = Rivia()
-	rivia.what()
+# def load_func():
+# 	global rivia
+# 	rivia = Rivia()
+# 	rivia.what()
 
 def allowed_file(filename):
 	return '.' in filename and \
@@ -54,7 +54,7 @@ def compute_results(question):
 
 @app.route('/') 
 def home():
-	load_func()
+	# load_func()
 	return render_template("index.html")
 
 # @app.route('/favicon.ico')
@@ -201,6 +201,5 @@ def open_browser():
 	webbrowser.get(path).open_new('http://127.0.0.1:5000')
 
 # if __name__ == '__main__':
-# 	load_func()
 # 	Timer(1, open_browser).start();
 # 	app.run(debug=True) 
