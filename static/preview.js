@@ -86,6 +86,6 @@ const handleUpload = files => {
 	    upload_box.style.display = "none";
 	  })
 	.catch(error => {
-	console.error(error)
+		console.error(error)
 	})
 }
