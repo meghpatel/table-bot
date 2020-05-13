@@ -80,6 +80,9 @@ def upload():
 	if request.method == 'POST':
 		f = request.files['table']
 		if f and allowed_file(f.filename):
+			print ("What is rivia here? ")
+			print (rivia)
+			print ("Is it none?")
 			path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename))
 			f.save(path)
 			extention = f.filename.rsplit('.', 1)[1].lower()
@@ -89,7 +92,7 @@ def upload():
 			elif extention in ['txt']:
 				print ('Passage loaded')
 				rivia.type = 'passage'		
-			print (rivia.type)
+			print (f'Type is {rivia.type}')
 			print (type(rivia.type))
 			print (rivia.type == 'table')
 			rivia.process_file(path,rivia.type)
