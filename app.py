@@ -14,6 +14,8 @@ import requests
 import numpy as np
 from bs4 import BeautifulSoup
 import csv
+import wget
+import urllib
 
 app = Flask(__name__) 
 
@@ -230,14 +232,25 @@ def speech():
 		   audio = r.record(source)
 		#  Speech recognition using Google Speech Recognition
 		try:
-			recog = r.recognize_google(audio, language = 'en-US')
+			current_language = session['language']
+			recog = r.recognize_google(audio, language = current_language)
+
+			query = None
+			if (current_language == "hi-IN"):
+				print("You said: " + recog)
+				query = recog
+				translated = rivia.translate_en(query)	
+				print (f"which is translated to english as : {translated}")
+				query = str(translated)
+			else:
+				print("You said: " + recog)
+				query = recog
 			# for testing purposes, we're just using the default API key
 			# to use another API key, use r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")
 			# instead of `r.recognize_google(audio)`` 
 
-			print("You said: " + recog)
-			query = recog
-
+			
+			print ("query to compute: ",query)
 			answer = compute_results(query, rivia)
 			print ("Answer",answer)
 			print (type(answer))
@@ -246,8 +259,24 @@ def speech():
 			response_path = "../" + path
 
 			ans = {"query" : query,"path":response_path, "textres":answer, "status":"OK"}
-			myobj = gTTS(text=str(answer), lang='en', slow=False)
-			myobj.save(path) 
+			if current_language == "hi-IN":
+				print (os.path.isfile(path))
+				if os.path.isfile(path):
+					os.remove(path)
+					print ("File removed")
+
+				random_str = rivia.generate_random()
+				translated_path = 'static/audio/translated/answer_{}.mp3'.format(random_str)
+				ans['path'] = "../"+ translated_path
+				translated_text = rivia.translate_hi(answer)
+				print (f"translated answer: {translated_text}")
+				hi_speech = urllib.parse.quote_plus(str(translated_text))
+				link = "http://ivrapi.indiantts.co.in/tts?type=indiantts&text={}&api_key=cb893c70-46af-11e8-9cf4-3bfbf17df6fd&user_id=37962&action=play&numeric=hcurrency&lang=hi_mohita".format(hi_speech).replace(' ','%20')
+				print (link)
+				wget.download(link, translated_path)
+			else:
+				myobj = gTTS(text=str(answer), lang='en', slow=False)
+				myobj.save(path) 
 			
 			res = json.dumps(ans)
 
@@ -266,6 +295,17 @@ def speech():
 		return res
 	else:
 		return "No method"
+
+@app.route('/updatelangauge',methods=['POST','GET'])
+def updatelangauge():
+	if request.method == 'POST':
+		data = request.get_json()
+		print (data)
+		session["language"] = data['language']
+		response = {"status":"success"}
+		return json.dumps(response)
+	else:
+		return json.dumps({"status":"error"})
 
 def open_browser():
 	path = '/usr/bin/google-chrome %s --incognito'

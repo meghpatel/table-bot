@@ -58,17 +58,30 @@
         <div id="tabledis" class="centered"></div>
     </div>
 
-    <script src="../static/preview.js"></script>
+    
 
 
     <div class="split right" id ='splitright'>
-        <h3 align="center" class='section-title' style="position: relative;">Chat</h3>
+        <h3 align="center" class='section-title' id="chatText" style="position: relative;">Chat</h3>
+        <!-- <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+        </label> -->
+        <!-- Rounded switch -->
+        <div class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+            <label class="onoffswitch-label" for="myonoffswitch">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+            </label>
+        </div>
+        <p id="updating"></p>
         <div class='chatwin'>
             <div id="chatbot" >
             </div>
         </div>    
         
-    
+    <script src="../static/preview.js"></script>
         <br><br>
 
         <div id="chat1">
