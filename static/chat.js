@@ -1,4 +1,4 @@
-URL = window.URL || window.webkitURL;
+URL1 = window.URL || window.webkitURL;
 var gumStream;
 var rec;
 var input;
@@ -14,7 +14,6 @@ let message_count = 0
 
 recordButton.addEventListener("click", startRecording);
 stopButton.addEventListener("click", stopRecording);
-
 
 console.log("I am here");
 inputbox.addEventListener('keyup', event => {chat(event)});
@@ -57,7 +56,7 @@ function stopRecording() {
 
 function createDownloadLink(blob) {
 	
-	var url = URL.createObjectURL(blob);
+	var url = URL1.createObjectURL(blob);
 	var filename = "12";
 	const au = document.createElement('audio');
 	// const audio_chat = document.getElementById('audbox');

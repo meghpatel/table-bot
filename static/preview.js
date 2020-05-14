@@ -1,3 +1,15 @@
+
+const switcher = document.getElementById("myonoffswitch");
+
+switcher.addEventListener('change', event => {
+	console.log("Changed Propertyl");
+	const update = document.getElementById('updating');
+	update.textContent = "Updating...";
+	console.log(switcher.checked);
+	updatePreference();
+});
+
+
 document.querySelector('#fileUpload').addEventListener('change', event => {
 	const files = event.target.files;
 	handleUpload(files)
@@ -88,4 +100,42 @@ const handleUpload = files => {
 	.catch(error => {
 		console.error(error)
 	})
+}
+
+function updatePreference(){
+
+	const url = `${window.origin}/updatelangauge`;
+
+	console.log(switcher.checked);
+	let data;
+	if (switcher.checked){
+		console.log("Send switch to English");
+		data = {
+			language:'en-IN'
+		}
+	}
+	else{
+		console.log("Sending switch to hindi");
+		data = {
+			language:'hi-IN'
+		}
+	}
+
+	fetch(url,{
+		method: 'post',
+		body: JSON.stringify(data),
+		headers: {
+	      'Content-Type': 'application/json'
+	    },
+	}).then(response => response.json())
+	.then(data => {
+		const update = document.getElementById('updating');
+		update.textContent = "Updated Language preference";
+		console.log(data);
+		update.textContent = "";
+	})
+	.catch (error => {
+		console.log(error);
+	})
+	
 }

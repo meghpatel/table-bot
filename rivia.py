@@ -11,11 +11,18 @@ import pandas as pd
 from fuzzywuzzy import fuzz 
 from fuzzywuzzy import process
 import csv
+from textblob import TextBlob
+from textblob.exceptions import NotTranslated
+import wget
+import random
+import math
+
 
 class Rivia:
 
-	def __init__(self, type=None):
+	def __init__(self, type=None, language="en-IN"):
 		self.type = type
+		self.language = language
 
 	def what(self):
 		print ("Rivia is a AI based Chatbot")
@@ -92,7 +99,6 @@ class Rivia:
 			  "passage": passage,
 			  "question": question
 			}
-
 			result = bidaf.predict_json(data)
 			print(result["best_span_str"])
 			return result, self.type
@@ -123,6 +129,32 @@ class Rivia:
 		else:
 			fd.write(d)
 		fd.close()
+
+	def translate_en(self, original_text):
+		source = TextBlob(original_text)
+		return source.translate(to='en')
+
+	def translate_hi(self, original_text):
+		try:
+			source = TextBlob(original_text)
+			return source.translate(to='hi')
+		except NotTranslated:
+			return original_text
+		except Exception as e:
+			return original_text
+	def generate_random(self):
+		digits = [i for i in range(0, 10)]
+
+		random_str = ""
+
+		for i in range(6):
+			index = math.floor(random.random() * 10)
+
+			random_str += str(digits[index])
+
+		## displaying the random string
+		print(random_str)
+		return random_str
 
 	def __repr__(self):
 		return {"type":self.type} 

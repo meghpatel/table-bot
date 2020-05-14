@@ -14,6 +14,9 @@ import requests
 import numpy as np
 from bs4 import BeautifulSoup
 import csv
+import wget
+import urllib
+import re
 
 app = Flask(__name__) 
 
@@ -56,8 +59,13 @@ def index():
 
 @app.route('/home') 
 def home():
-	# load_func()
-	return render_template("index.html")
+	checked = "checked"
+	if "language" in session.keys():
+		if session['language'] == "hi-IN":
+			checked = ''
+		else:
+			checked = "checked"
+	return render_template("index.html", value=checked)
 
 # @app.route('/favicon.ico')
 # def favicon():
@@ -130,6 +138,7 @@ def getanswer():
 
 @app.route('/uploadwiki', methods=['POST', 'GET'])
 def uploadwiki():
+	rivia = Rivia()
 	url = 'https://en.wikipedia.org/wiki/COVID-19_pandemic_by_country_and_territory#covid19-container'
 	r = requests.get(url)
 
@@ -190,10 +199,49 @@ def uploadwiki():
 	print ('Table loaded')
 	rivia.type = 'table'	
 	rivia.process_file(path,rivia.type)
+	session["type"] = rivia.type
 
 @app.route('/wikiqa')
 def wikiqa():
 	return render_template('wikiqa.html')
+
+@app.route('/uploadpassage', methods=['POST', 'GET'])
+def uploadpassage():
+	if request.method == 'POST':
+		rivia = Rivia()
+		print ('Got another request')
+		req = request.get_json()
+		print(req)
+		
+		topic =req['site']
+		url = 'https://en.wikipedia.org/wiki/'+topic
+		res = requests.get(url)
+		res.raise_for_status()
+
+		wiki = BeautifulSoup(res.text,'html.parser')
+		index=0
+		string = ''
+		for i in wiki.select('p'):
+			string += (i.getText())
+			index+=1
+			if index == 6:
+				break
+
+		replaced = re.sub(r'\[[0-9]+\]', '', string)
+		wikipassage = 'data/wikipassage.txt'
+		file = open(wikipassage,'w+')
+		file.write(replaced)
+		rivia.type = 'passage'	
+		rivia.process_file(wikipassage,rivia.type)
+		# f = open(passage,'r+').read()
+		ans = "<h4 style=\"margin-left:50px;margin-right:50px\">"+replaced+"</h4>"
+		resp = {"ans":ans}
+		session["type"] = rivia.type
+		return jsonify(resp)
+
+@app.route('/passage')
+def passage():
+	return render_template('passage.html')
 
 @app.route('/audio')
 def audio():
@@ -234,14 +282,29 @@ def speech():
 		   audio = r.record(source)
 		#  Speech recognition using Google Speech Recognition
 		try:
-			recog = r.recognize_google(audio, language = 'en-US')
+			if "language" in session.keys():
+				current_language = session['language']
+			else:
+				current_language = 'en-IN'
+			print (current_language)
+			recog = r.recognize_google(audio, language = current_language)
+
+			query = None
+			if (current_language == "hi-IN"):
+				print("You said: " + recog)
+				query = recog
+				translated = rivia.translate_en(query)	
+				print (f"which is translated to english as : {translated}")
+				query = str(translated)
+			else:
+				print("You said: " + recog)
+				query = recog
 			# for testing purposes, we're just using the default API key
 			# to use another API key, use r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")
 			# instead of `r.recognize_google(audio)`` 
 
-			print("You said: " + recog)
-			query = recog
-
+			
+			print ("query to compute: ",query)
 			answer = compute_results(query, rivia)
 			print ("Answer",answer)
 			print (type(answer))
@@ -250,8 +313,24 @@ def speech():
 			response_path = "../" + path
 
 			ans = {"query" : query,"path":response_path, "textres":answer, "status":"OK"}
-			myobj = gTTS(text=str(answer), lang='en', slow=False)
-			myobj.save(path) 
+			if current_language == "hi-IN":
+				print (os.path.isfile(path))
+				if os.path.isfile(path):
+					os.remove(path)
+					print ("File removed")
+
+				random_str = rivia.generate_random()
+				translated_path = 'static/audio/translated/answer_{}.mp3'.format(random_str)
+				ans['path'] = "../"+ translated_path
+				translated_text = rivia.translate_hi(answer)
+				print (f"translated answer: {translated_text}")
+				hi_speech = urllib.parse.quote_plus(str(translated_text))
+				link = "http://ivrapi.indiantts.co.in/tts?type=indiantts&text={}&api_key=cb893c70-46af-11e8-9cf4-3bfbf17df6fd&user_id=37962&action=play&numeric=hcurrency&lang=hi_mohita".format(hi_speech).replace(' ','%20')
+				print (link)
+				wget.download(link, translated_path)
+			else:
+				myobj = gTTS(text=str(answer), lang='en', slow=False)
+				myobj.save(path) 
 			
 			res = json.dumps(ans)
 
@@ -270,6 +349,20 @@ def speech():
 		return res
 	else:
 		return "No method"
+
+@app.route('/updatelangauge',methods=['POST','GET'])
+def updatelangauge():
+	if request.method == 'POST':
+		data = request.get_json()
+		print (data)
+		print (session.keys())
+		# if "language" in session.keys():
+		session["language"] = data['language']
+		response = {"status":"success"}
+		print (session)
+		return json.dumps(response)
+	else:
+		return json.dumps({"status":"error"})
 
 def open_browser():
 	path = '/usr/bin/google-chrome %s --incognito'

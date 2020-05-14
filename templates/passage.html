@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rivia</title>
+    <title>Wiki-passage</title>
     <!-- <script src="https://kit.fontawesome.com/3da45b9264.js" crossorigin="anonymous"></script> -->
     <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -42,46 +42,31 @@
     };
 
     </script>
-<h1 class="text-center app-header" style="font-family:Inknut Antiqua;font-size: 55px;font-weight: 500;color:white;">Rivia</h2>
+<h1 class="text-center app-header" style="font-family:Inknut Antiqua;font-size: 55px;font-weight: 500;color:white;">Wiki-passage</h2>
 <div style="overflow: auto;">
 
     <div class="split left">
         <h3 align="center" class='section-title' style="position: relative;">Data</h3>
         <div id="drop-area">
-            <form method="post" enctype="multipart/form-data" >
-                <label for="fileUpload" class="custom-file-upload">
+                <!-- <label for="fileUpload" class="custom-file-upload">
                     <i class="fa fa-cloud-upload"></i> Upload
-                </label>
-              <input type="file"  id="fileUpload"/>
-            </form>
+                </label> -->
+              <input type="text"  id="sitetext" placeholder="Add topic here"/>
+            
         </div>
         <div id="tabledis" class="centered"></div>
     </div>
 
-    
+    <script src="../static/passage.js"></script>
 
 
     <div class="split right" id ='splitright'>
-        <h3 align="center" class='section-title' id="chatText" style="position: relative;">Chat</h3>
-        <!-- <label class="switch">
-            <input type="checkbox">
-            <span class="slider"></span>
-        </label> -->
-        <!-- Rounded switch -->
-        <div class="onoffswitch">
-            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" {{ value }}>
-            <label class="onoffswitch-label" for="myonoffswitch">
-                <span class="onoffswitch-inner"></span>
-                <span class="onoffswitch-switch"></span>
-            </label>
-        </div>
-        <p id="updating"></p>
+        <h3 align="center" class='section-title' style="position: relative;">Chat</h3>
         <div class='chatwin'>
             <div id="chatbot" >
             </div>
         </div>    
-        
-    <script src="../static/preview.js"></script>
+    
         <br><br>
 
         <div id="chat1">
