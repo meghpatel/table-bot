@@ -16,6 +16,8 @@ from bs4 import BeautifulSoup
 import csv
 import wget
 import urllib
+import re
+
 
 app = Flask(__name__) 
 
@@ -128,6 +130,7 @@ def getanswer():
 
 @app.route('/uploadwiki', methods=['POST', 'GET'])
 def uploadwiki():
+	rivia = Rivia()
 	url = 'https://en.wikipedia.org/wiki/COVID-19_pandemic_by_country_and_territory#covid19-container'
 	r = requests.get(url)
 
@@ -188,10 +191,52 @@ def uploadwiki():
 	print ('Table loaded')
 	rivia.type = 'table'	
 	rivia.process_file(path,rivia.type)
+	session["type"] = rivia.type
 
 @app.route('/wikiqa')
 def wikiqa():
 	return render_template('wikiqa.html')
+
+@app.route('/uploadpassage', methods=['POST', 'GET'])
+def uploadpassage():
+	if request.method == 'POST':
+		rivia = Rivia()
+		print ('Got another request')
+		req = request.get_json()
+		print(req)
+		
+		topic =req['site']
+		url = 'https://en.wikipedia.org/wiki/'+topic
+		res = requests.get(url)
+		res.raise_for_status()
+
+		wiki = BeautifulSoup(res.text,'html.parser')
+		index=0
+		string = ''
+		for i in wiki.select('p'):
+			string += (i.getText())
+			index+=1
+			if index == 6:
+				break
+		print(string)	
+
+		replaced = re.sub(r'\[[0-9]+\]', '', string)
+		print(replaced)
+		wikipassage = 'data/wikipassage.txt'
+		file = open(wikipassage,'w+')
+		file.write(replaced)
+		rivia.type = 'passage'	
+		rivia.process_file(wikipassage,rivia.type)
+		# f = open(passage,'r+').read()
+		ans = "<h4 style=\"margin-left:50px;margin-right:50px\">"+replaced+"</h4>"
+		resp = {"ans":ans}
+		session["type"] = rivia.type
+		return jsonify(resp)
+
+
+@app.route('/passage')
+def passage():
+	return render_template('passage.html')
 
 @app.route('/audio')
 def audio():
