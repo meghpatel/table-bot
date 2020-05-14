@@ -18,7 +18,6 @@ import wget
 import urllib
 import re
 
-
 app = Flask(__name__) 
 
 app.config['UPLOAD_FOLDER'] = 'data/'
@@ -224,10 +223,8 @@ def uploadpassage():
 			index+=1
 			if index == 6:
 				break
-		print(string)	
 
 		replaced = re.sub(r'\[[0-9]+\]', '', string)
-		print(replaced)
 		wikipassage = 'data/wikipassage.txt'
 		file = open(wikipassage,'w+')
 		file.write(replaced)
@@ -238,7 +235,6 @@ def uploadpassage():
 		resp = {"ans":ans}
 		session["type"] = rivia.type
 		return jsonify(resp)
-
 
 @app.route('/passage')
 def passage():

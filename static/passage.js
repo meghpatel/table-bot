@@ -23,8 +23,8 @@ const scrape = event => {
 			})
         }).then(response => response.json())
         .then(data => {
-            console.log(data)
-            print(data)
+            // console.log(data)
+            // print(data)
             document.getElementById('tabledis').innerHTML = data.ans;
             const box = document.getElementById('chat1');
             const inp = document.getElementById("inputbox");
