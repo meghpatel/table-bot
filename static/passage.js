@@ -1,7 +1,7 @@
 const sitebox = document.getElementById("sitetext");
 
-sitebox.addEventListener('keyup', event => {chat(event)});
-const chat = event => {
+sitebox.addEventListener('keyup', event => {scrap(event)});
+const scrap = event => {
     const url = `${window.origin}/uploadpassage`;
     const url1 = `${window.origin}/getanswer`;
     console.log(url);

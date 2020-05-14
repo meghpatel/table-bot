@@ -24,14 +24,14 @@
 23,Portugal,28132,1175,3182
 24,Sweden,27909,3460,4971
 25,Qatar,26539,14,3143
-26,Belarus,25825,146,7711
-27,Singapore,25346,21,4809
+26,Singapore,26098,21,4809
+27,Belarus,25825,146,7711
 28,Ireland,23401,1497,19470
 29,United Arab Emirates,20386,206,6523
 30,Bangladesh,17822,269,3361
 31,Poland,17204,861,6410
-32,Israel,16539,262,12173
-33,Ukraine,16425,439,3716
+32,Ukraine,16847,456,4143
+33,Israel,16539,262,12173
 34,Japan,16103,696,9868
 35,Romania,16002,1016,7961
 36,Austria,15964,624,14304
@@ -63,7 +63,7 @@
 62,Oman,4019,17,1289
 63,Luxembourg,3904,103,3629
 64,Armenia,3718,48,1500
-65,Hungary,3341,430,1102
+65,Hungary,3380,436,1169
 66,Iraq,3032,115,1966
 67,Thailand,3017,56,2844
 68,Bolivia,2964,128,313
@@ -72,7 +72,7 @@
 71,Azerbaijan,2758,35,1789
 72,Uzbekistan,2612,11,2076
 73,Guinea,2374,14,856
-74,Puerto Rico,2329,114,746
+74,Puerto Rico,2329,115,746
 75,Croatia,2213,94,1834
 76,Bosnia & Herzegovina,2181,120,1228
 77,Senegal,2105,21,782
@@ -116,7 +116,7 @@
 116,Kenya,737,40,281
 117,Uruguay,719,19,545
 118,Diamond Princess,712,14,651
-119,Georgia,647,11,372
+119,Georgia,652,12,383
 120,San Marino,643,41,161
 121,Jordan,582,9,392
 122,Equatorial Guinea,522,6,13
@@ -142,7 +142,7 @@
 142,Ethiopia,263,5,108
 143,Guernsey,252,13,230
 144,Nepal,243,0,35
-145,SÃ£o TomÃ© & PrÃ­ncipe,235,7,4
+145,São Tomé & Príncipe,235,7,4
 146,Haiti,219,18,17
 147,Togo,219,11,96
 148,Liberia,213,20,101
@@ -198,7 +198,7 @@
 198,New Caledonia,18,0,18
 199,Saint Lucia,18,0,17
 200,Saint Vincent,17,0,9
-201,CuraÃ§ao,16,1,14
+201,Curaçao,16,1,14
 202,Dominica,16,0,15
 203,Namibia,16,0,11
 204,Burundi,15,1,7

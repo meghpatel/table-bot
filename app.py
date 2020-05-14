@@ -222,7 +222,7 @@ def uploadpassage():
 		wikipassage = 'data/wikipassage.txt'
 		file = open(wikipassage,'w+')
 		file.write(replaced)
-		rivia.type = 'passage'	
+		rivia.type = 'passage'
 		rivia.process_file(wikipassage,rivia.type)
 		# f = open(passage,'r+').read()
 		ans = "<h4 style=\"margin-left:50px;margin-right:50px\">"+replaced+"</h4>"

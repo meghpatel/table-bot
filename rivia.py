@@ -99,7 +99,6 @@ class Rivia:
 			  "passage": passage,
 			  "question": question
 			}
-
 			result = bidaf.predict_json(data)
 			print(result["best_span_str"])
 			return result, self.type
@@ -109,8 +108,8 @@ class Rivia:
 	def process_file(self, path,filetype):
 		self.type=filetype
 		if self.type == 'table':
-			csv.writer(open("data/output.txt", 'w+',newline='\n'), delimiter='\t').writerows(csv.reader(open(path)))
-			
+			csv.writer(open("data/output.txt", 'w+',newline='\n'), delimiter='\t').writerows(csv.reader(open(path)))	
+		
 		else:
 			file = open("data/output.txt", "w+")
 			fread = open(path,'r+')
