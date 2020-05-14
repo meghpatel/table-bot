@@ -242,12 +242,12 @@ input[type="file"] {
     box-sizing: border-box;
 }
 .onoffswitch-inner:before {
-    content: "HI";
+    content: "EN";
     padding-left: 10px;
     background-color: #778899; color: #FFFFFF;
 }
 .onoffswitch-inner:after {
-    content: "EN";
+    content: "HI";
     padding-right: 10px;
     background-color: #F08080; color: #FFFFFF;
     text-align: right;

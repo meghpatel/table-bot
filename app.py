@@ -59,7 +59,13 @@ def index():
 
 @app.route('/home') 
 def home():
-	return render_template("index.html")
+	checked = "checked"
+	if "language" in session.keys():
+		if session['language'] == "hi-IN":
+			checked = ''
+		else:
+			checked = "checked"
+	return render_template("index.html", value=checked)
 
 # @app.route('/getdata', methods=['GET', 'POST'])
 # def getdata():
@@ -273,7 +279,11 @@ def speech():
 		   audio = r.record(source)
 		#  Speech recognition using Google Speech Recognition
 		try:
-			current_language = session['language']
+			if "language" in session.keys():
+				current_language = session['language']
+			else:
+				current_language = 'en-IN'
+			print (current_language)
 			recog = r.recognize_google(audio, language = current_language)
 
 			query = None
@@ -342,8 +352,11 @@ def updatelangauge():
 	if request.method == 'POST':
 		data = request.get_json()
 		print (data)
+		print (session.keys())
+		# if "language" in session.keys():
 		session["language"] = data['language']
 		response = {"status":"success"}
+		print (session)
 		return json.dumps(response)
 	else:
 		return json.dumps({"status":"error"})

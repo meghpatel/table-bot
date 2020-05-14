@@ -1,4 +1,4 @@
-URL = window.URL || window.webkitURL;
+URL1 = window.URL || window.webkitURL;
 var gumStream;
 var rec;
 var input;
@@ -56,7 +56,7 @@ function stopRecording() {
 
 function createDownloadLink(blob) {
 	
-	var url = URL.createObjectURL(blob);
+	var url = URL1.createObjectURL(blob);
 	var filename = "12";
 	const au = document.createElement('audio');
 	// const audio_chat = document.getElementById('audbox');
