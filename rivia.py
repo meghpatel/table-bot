@@ -112,7 +112,8 @@ class Rivia:
 		
 		else:
 			file = open("data/output.txt", "w+")
-			fread = open(path,'r+')
+			fread = open(path,'w+')
+			print(path)
 			x = fread.read()
 			file.write(x)
 

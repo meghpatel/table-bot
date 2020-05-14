@@ -225,11 +225,12 @@ def uploadpassage():
 				break
 
 		replaced = re.sub(r'\[[0-9]+\]', '', string)
+		replaced = replaced.strip()
 		wikipassage = 'data/wikipassage.txt'
 		file = open(wikipassage,'w+')
 		file.write(replaced)
 		rivia.type = 'passage'
-		rivia.process_file(wikipassage,rivia.type)
+		rivia.process_file(wikipassage,'passage')
 		# f = open(passage,'r+').read()
 		ans = "<h4 style=\"margin-left:50px;margin-right:50px\">"+replaced+"</h4>"
 		resp = {"ans":ans}
