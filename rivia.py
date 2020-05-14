@@ -92,7 +92,7 @@ class Rivia:
 			archive = load_archive("model/bidaf-model.tar.gz")
 			bidaf = Predictor.from_archive(archive, "reading-comprehension")
 
-			with open('data/output.txt','r') as f:
+			with open("data/output.txt","r",encoding="utf-8") as f:
 				passage = f.read()
 
 			data = {
@@ -111,15 +111,14 @@ class Rivia:
 			csv.writer(open("data/output.txt", 'w+',newline='\n'), delimiter='\t').writerows(csv.reader(open(path)))	
 		
 		else:
-			file = open("data/output.txt", "w+")
-			fread = open(path,'w+')
-			print(path)
-			x = fread.read()
+			file = open("data/output.txt", "w+",newline='\n')
+			with open(path,"r",encoding="utf-8") as f:
+				x = f.read()
+			print(x)
 			file.write(x)
 
-		fd=open("data/output.txt","r")
-		d=fd.read()
-		fd.close()
+		with open("data/output.txt","r",encoding="utf-8") as f:
+			d = f.read()
 		
 		fd=open("data/final_output.txt","w+",newline='\n')
 		if self.type == 'table':

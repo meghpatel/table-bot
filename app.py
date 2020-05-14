@@ -221,14 +221,20 @@ def uploadpassage():
 		for i in wiki.select('p'):
 			string += (i.getText())
 			index+=1
-			if index == 6:
+			if index == 4:
 				break
 
 		replaced = re.sub(r'\[[0-9]+\]', '', string)
-		replaced = replaced.strip()
+		lines = replaced.split('\n')
+		final = str()
+		for l in lines:
+			if l != '':
+				final=final+l+" "
+
 		wikipassage = 'data/wikipassage.txt'
-		file = open(wikipassage,'w+')
-		file.write(replaced)
+		with open(wikipassage, "w", encoding="utf-8") as fread:
+			fread.write(final)
+
 		rivia.type = 'passage'
 		rivia.process_file(wikipassage,'passage')
 		# f = open(passage,'r+').read()
