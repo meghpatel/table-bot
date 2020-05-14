@@ -15,7 +15,6 @@ let message_count = 0
 recordButton.addEventListener("click", startRecording);
 stopButton.addEventListener("click", stopRecording);
 
-
 console.log("I am here");
 inputbox.addEventListener('keyup', event => {chat(event)});
 recordButton.addEventListener('click', startRecording);
