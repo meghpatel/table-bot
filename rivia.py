@@ -99,7 +99,6 @@ class Rivia:
 			  "passage": passage,
 			  "question": question
 			}
-
 			result = bidaf.predict_json(data)
 			print(result["best_span_str"])
 			return result, self.type
