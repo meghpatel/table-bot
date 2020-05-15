@@ -2,10 +2,7 @@ data
 .ipynb_checkpoints
 __pycache__
 rivia-env/
-<<<<<<< HEAD
 .vscode
-=======
->>>>>>> master
 data/final_output.txt
 data/output.txt
 static/audio
