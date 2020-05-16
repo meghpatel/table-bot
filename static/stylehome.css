@@ -7,21 +7,50 @@
 body {
     margin: 0;
     font-size: 17px;
-    /* background-image: url('../static/background.jpg'); */
-    /* background: linear-gradient(132deg, #ec5218, #1665c1);
-                background-size: 400% 400%;
-                animation: BackgroundGradient 30s ease infinite; */
-                background: #4e54c8;  
-                background: linear-gradient(to left, #8f94fb, #4e54c8);  
-                width: 100%;
-                height:70%;
+    height: 100%;
+    width: 100%;
+    position: relative;
 }
-/* @keyframes BackgroundGradient {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-} */
+ /*================================================
+             3 HEADER AREA
+==================================================*/
+ 
+.custom-navbar {
+    border-width: 0;
+    background:transparent;  
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    border-radius: 5px;
+}
 
+.main-menu {
+    text-transform: uppercase;
+}
+.main-menu ul.navbar-nav {
+    float: right;
+}
+.main-menu ul.nav.navbar-nav li.active {
+    position: relative;
+}
+.main-menu .nav a {} .main-menu a {
+    color: white;
+    font-weight: 600;
+    font-size: 17px;
+    /* padding: 15px 13px; */
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    position: relative;
+}
+
+ /*================================================
+              WELCOME AREA
+==================================================*/
+.home{
+    background: #4e54c8;  
+    background: linear-gradient(to left, #8f94fb, #4e54c8);  
+    width: 100%;
+    height:100%;
+}
 .circles{
     position: absolute;
     top: 0;
@@ -136,23 +165,16 @@ body {
     }
 
 }
-/* #myVideo {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-} */
-  /* Add some content at the bottom of the video/page */
+
 .content {
-    position: relative;
+    position: absolute;
     background: rgb(255, 255, 255,0);
     /* rgba(255,255,255, 1); */
-    width: 50%;
-    padding: 20px;
-    border-radius: 20px;
-    margin-top: 11%;
-    margin-left: 25%;
+    width: 100%;
+    padding-top: 10%;
+    /* border-radius: 20px; */
+    /* margin-top: 11%;
+    margin-left: 25%; */
     z-index: 1;
 }
 .background {
@@ -164,7 +186,7 @@ body {
   }
 /* Style the button used to pause/play the video */
 .btn-homepage {
-    width: 200px;
+    width: 260px;
     font-size: 22px;
     padding: 5px;
     font-style: bold;
@@ -181,4 +203,29 @@ body {
 .btn-homepage:hover {
     background: rgba(255,255,255, 1);
     color: #000;
+}
+
+.accessory {
+    height: 6px;
+    background-image: radial-gradient(
+      closest-side,
+      hsla(0, 0%, 50%, 1.0),
+      hsla(0, 0%, 50%, 0) 100%);
+    position: relative;
+}
+.accessory:after {
+    position: absolute;
+    top:  50%;
+    left: 50%;
+    display:block;
+    background-color: hsl(0, 0%, 75%);
+    height: 12px;
+    width:  12px;
+    transform: rotate(45deg);
+    margin-top:  -10px;
+    margin-left: -10px;
+    border-radius: 4px 0;
+    border: 4px solid hsla(0, 0%, 100%, 0.35);
+    background-clip: padding-box;
+    box-shadow: -10px 10px 0 hsla(0, 0%, 100%, 0.15), 10px -10px 0 hsla(0, 0%, 100%, 0.15);
 }
