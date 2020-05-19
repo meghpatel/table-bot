@@ -1,5 +1,6 @@
 
 const switcher = document.getElementById("myonoffswitch");
+const select_menu = document.getElementById("selectMenu");
 
 switcher.addEventListener('change', event => {
 	console.log("Changed Propertyl");
@@ -13,6 +14,29 @@ switcher.addEventListener('change', event => {
 document.querySelector('#fileUpload').addEventListener('change', event => {
 	const files = event.target.files;
 	handleUpload(files)
+});
+
+select_menu.addEventListener('change', event => {
+	console.log("Changed");
+	console.log(event);
+	console.log(select_menu.value);
+	const url = `${window.origin}/upload`;
+
+	data = {sampledata:select_menu.value}
+
+	fetch(url,{
+		method: 'post',
+		body: JSON.stringify(data),
+		headers: {
+	      'Content-Type': 'application/json'
+	    },
+	}).then(response => response.json())
+	.then(data => {
+		displayData(data);
+	})
+	.catch (error => {
+		console.log(error);
+	})
 });
 
 let dropArea = document.getElementById('drop-area');
@@ -56,21 +80,7 @@ const handleUpload = files => {
 	const url = `${window.origin}/upload`;
 	const url1 = `${window.origin}/getanswer`;
 	console.log(url);
-	// let files;
 
-	// if (event.target.files){
-	// 	files = event.target.files;
-	// 	console.log("Inside IFFF;");
-	// }
-	// else{
-	// 	let dt = event.dataTransfer;
-	// 	let files_new = dt.files;	
-	// 	files = files_new;
-	// }
-
-	// console.log(files_new)
-
-	// const files = files_new;
 	const formData = new FormData()
 	console.log('file',files);
 	formData.append('table', files[0], files[0].name)
@@ -82,20 +92,8 @@ const handleUpload = files => {
 	}).then(response => response.json())
 	.then(data => {
 
-		console.log(data)
-	    document.getElementById('tabledis').innerHTML = data.ans;
-	    const box = document.getElementById('chat1');
-	    const inp = document.getElementById("inputbox");
-	    const rec_btn = document.getElementById("recordButton");
-	    const upload_box = document.getElementById("drop-area");
-
-	    rec_btn.style.display = "inline";
-	    inp.setAttribute('type','text');
-	    inp.setAttribute('size',50);
-	    inp.style.display = "inline";
-	    inp.focus();
-	    box.style['text-align'] = 'center';
-	    upload_box.style.display = "none";
+		console.log(data);
+		displayData(data);
 	  })
 	.catch(error => {
 		console.error(error)
@@ -138,4 +136,20 @@ function updatePreference(){
 		console.log(error);
 	})
 	
+}
+
+function displayData(data){
+	document.getElementById('tabledis').innerHTML = data.ans;
+	const box = document.getElementById('chat1');
+	const inp = document.getElementById("inputbox");
+	const rec_btn = document.getElementById("recordButton");
+	const upload_box = document.getElementById("drop-area");
+
+	rec_btn.style.display = "inline";
+	inp.setAttribute('type','text');
+	inp.setAttribute('size',50);
+	inp.style.display = "inline";
+	inp.focus();
+	box.style['text-align'] = 'center';
+	upload_box.style.display = "none";
 }
