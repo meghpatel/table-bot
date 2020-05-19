@@ -114,7 +114,6 @@ class Rivia:
 			file = open("data/output.txt", "w+",newline='\n')
 			with open(path,"r",encoding="utf-8") as f:
 				x = f.read()
-			print(x)
 			file.write(x)
 
 		with open("data/output.txt","r",encoding="utf-8") as f:
