@@ -87,32 +87,55 @@ def home():
 @app.route('/upload', methods=['POST', 'GET'])
 def upload():
 	if request.method == 'POST':
-		f = request.files['table']
-		if f and allowed_file(f.filename):
-			rivia = Rivia()
-			path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename))
-			f.save(path)
-			extention = f.filename.rsplit('.', 1)[1].lower()
-			if extention in ['csv', 'tsv', 'db']:
-				print ('Table loaded')
-				rivia.type = 'table'
-			elif extention in ['txt']:
-				print ('Passage loaded')
-				rivia.type = 'passage'		
-			rivia.process_file(path,rivia.type)
-			
-			if rivia.type == 'table':
-				df = pd.read_csv(path)
-				print (df.shape)
-				ans = df.to_html(bold_rows=True,classes="table table-hover thead-light table-striped")
-			else:
-				f = open(path,'r+').read()
-				ans = "<h4 style=\"margin-left:50px;margin-right:50px\">"+f+"</h4>"
+		rivia = Rivia()
+		extention = ''
 
-			resp = {"ans":ans}
-			session["type"] = rivia.type
+		if request.get_json() is not None:
+			print ("OOPS")
+			data = request.get_json()
+			fname = data['sampledata']
+			print (fname)
+			# print ()
+			extention = fname.split('.')[1]
+			print (extention,"Extension")
+			path = os.path.join(app.config['UPLOAD_FOLDER'], fname)
+			# resp = {"ans":}	
+
 		else:
-			resp = {"ans":"Out of format"}
+			print ("Check if table there: ")
+			print ("table" in request.files.keys())
+			print (request.get_json())
+
+			f = request.files['table']
+			if f and allowed_file(f.filename):
+				
+				path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename))
+				f.save(path)
+				extention = f.filename.rsplit('.', 1)[1].lower()
+				print (extention,"Extension")
+		
+		if extention in ['csv', 'tsv', 'db']:
+			print ('Table loaded')
+			rivia.type = 'table'
+		elif extention in ['txt']:
+			print ('Passage loaded')
+			rivia.type = 'passage'		
+		rivia.process_file(path,rivia.type)
+		
+		if rivia.type == 'table':
+			df = pd.read_csv(path)
+			print (df.shape)
+			ans = df.to_html(bold_rows=True,classes="table table-hover thead-light table-striped")
+		else:
+			f = open(path,'r+').read()
+			ans = "<h4 style=\"margin-left:50px;margin-right:50px\">"+f+"</h4>"
+
+		resp = {"ans":ans}
+		session["type"] = rivia.type
+	
+	# else:
+	# 	resp = {"ans":"Out of format"}
+		# print (resp)
 		return jsonify(resp)
 	else:
 		return 'GETTTTT OUT'
